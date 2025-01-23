@@ -38,3 +38,54 @@ module add_sub #(parameter WIDTH = 32)(
     assign sign_b = b[31];
     
 endmodule
+
+module ieee754_adder_rounder #(parameter WIDTH = 32) (
+    input  logic [WIDTH-1:0] A,  
+    input  logic [WIDTH-1:0] B,  
+    input  logic op,             
+    output logic [WIDTH-1:0] R,  
+    output logic overflow        
+);
+
+    logic [EXP_BITS-1:0] finalExp;
+    logic [MANT_BITS:0] finalMant;
+
+    //Normalize
+    always_comb begin
+        if (resultMant[MANT_BITS+1]) begin
+            finalMant = resultMant[MANT_BITS+1:1];
+            finalExp = expA + 1;
+        end else if (resultMant[MANT_BITS]) begin
+            finalMant = resultMant[MANT_BITS:0];
+            finalExp = expA;
+        end else begin
+            finalMant = resultMant[MANT_BITS:0] << 1;
+            finalExp = expA - 1;
+        end
+    end
+
+    logic [MANT_BITS-1:0] roundedMant;
+    logic roundUp;
+
+    always_comb begin
+        roundUp = finalMant[0] & (finalMant[1] | (finalMant[0] & finalMant[2]));
+        if (roundUp) begin
+            roundedMant = finalMant[MANT_BITS:1] + 1;
+        end else begin
+            roundedMant = finalMant[MANT_BITS:1];
+        end
+    end
+
+    always_comb begin
+        if (roundedMant == {MANT_BITS{1'b0}}) begin
+            finalExp = finalExp + 1;
+        end
+    end
+
+    always_comb begin
+        R = {resultSign, finalExp, roundedMant};
+        overflow = (finalExp > 8'hFF); // fuera de rango
+    end
+
+endmodule
+
