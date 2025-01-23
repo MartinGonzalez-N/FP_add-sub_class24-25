@@ -64,4 +64,9 @@ add_sub  exp_ins (
         a_less ? 2'b01 :
         a_equal ? 2'b11 : 2'b00; 
     end
+    
+    always @(*) begin
+    exp_op = (a_greater || a_equal) ? exp_a : exp_b;
+    end   
+    
 endmodule    
