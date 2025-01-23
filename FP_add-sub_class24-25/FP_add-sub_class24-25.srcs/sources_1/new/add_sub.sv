@@ -31,7 +31,7 @@ module add_sub #(parameter WIDTH = 32)(
     //Separate sign, exponent and mantissa values for both inputs
     assign mantissa_a = a[22:0];
     assign exp_a = a[30:23];
-    assign sing_a = a[31];
+    assign sign_a = a[31];
         
     assign mantissa_b = b[22:0];
     assign exp_b = b[30:23];
