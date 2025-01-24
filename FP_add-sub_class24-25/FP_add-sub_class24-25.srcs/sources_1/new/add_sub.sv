@@ -28,7 +28,7 @@ module add_sub #(parameter WIDTH = 32)(
     output [WIDTH-10:0] mantissa_a, mantissa_b, mantissa_result,
     output [WIDTH-25:0] exp_a, exp_b, exp_result,
     output a_greater    
-    );
+);
     
     //Separate sign, exponent and mantissa values for both inputs
     assign mantissa_a = a[22:0];
@@ -40,11 +40,11 @@ module add_sub #(parameter WIDTH = 32)(
     assign sign_b = b[31];
 endmodule
 
-module  exp_subtractor (    // Module that represents the exp subtractor block
+module  exp_subtractor #(parameter EXP = 8)(    // Module that represents the exp subtractor block
     logic exp_a,
     logic exp_b,
     logic a_greater, a_less, a_equal
-    );    
+);    
 
 add_sub  exp_ins (          // add_sub module instance
 
@@ -55,8 +55,8 @@ add_sub  exp_ins (          // add_sub module instance
     
 );    
 
-    reg [1:0] exp_disc;     // Exponent discriminant
-    reg [7:0] exp_value;    // Exponent output value
+    reg [EXP-7:0] exp_disc;     // Exponent discriminant
+    reg [EXP-1:0] exp_value;    // Exponent output value
     reg out_sign;
     //reg exp_sub;
     assign a_greater = exp_a > exp_b;
@@ -76,4 +76,22 @@ add_sub  exp_ins (          // add_sub module instance
     always @(*) begin
     out_sign = a_greater ? sign_a : sign_b;
     end      
-endmodule    
+endmodule 
+
+module right_shift #(parameter MANT = 23) (
+    input [MANT-1:0] smaller_mantissa,
+    input [7:0] shift_spaces,
+    output [MANT-1:0] shifted_mantissa
+);
+
+    assign shifted_mantissa = smaller_mantissa >> shift_spaces;          
+endmodule      
+
+// Pending
+module exp_update (
+    input [7:0] shift_spaces,
+    input shift_dir       
+);
+    
+    
+endmodule
