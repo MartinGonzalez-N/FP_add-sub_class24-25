@@ -19,22 +19,12 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module add_sub #(parameter WIDTH = 32)(
-    input  [WIDTH-1:0] a,b,
+module add_sub #(parameter MANTISSA_WIDTH = 23)(
+    input  [MANTISSA_WIDTH-1:0] ma, mb,
     input bit operation_select,
-    output [WIDTH-1:0] result,
-    output sign_a, sign_b, sign_result,
-    output [WIDTH-10:0] mantissa_a, mantissa_b, mantissa_result,
-    output [WIDTH-25:0] exp_a, exp_b, exp_result
+    output [WIDTH-1:0] result
     );
+
     
-    //Separate sign, exponent and mantissa values for both inputs
-    assign mantissa_a = a[22:0];
-    assign exp_a = a[30:23];
-    assign sign_a = a[31];
-        
-    assign mantissa_b = b[22:0];
-    assign exp_b = b[30:23];
-    assign sign_b = b[31];
     
 endmodule
