@@ -23,7 +23,7 @@
 module mantissa_swap #(parameter MANTISSA_WIDTH=23)(
     input [MANTISSA_WIDTH-1:0] ma, mb,
     input [1:0] exp_magnitude,
-    output [MANTISSA_WIDTH-1:0] greater_mantissa, smaller_mantissa
+    output reg [MANTISSA_WIDTH-1:0] greater_mantissa, smaller_mantissa
 );
 
 //local parameters
@@ -31,12 +31,25 @@ localparam AGREATER = 2'b10;
 localparam BGREATER = 2'b00;
 localparam EQUAL = 2'b11;
 
-
-case (exp_magnitude)
-    AGREATER: greater_mantissa = ma, smaller_mantissa = mb;
-    BGREATER: greater_mantissa = mb, smaller_mantissa = ma;
-    EQUAL: greater_mantissa = ma, smaller_mantissa = mb;
-    default: greater_mantissa = ma, smaller_mantissa = mb;
-endcase
+always @(*) begin 
+    case (exp_magnitude)
+        AGREATER: begin
+            greater_mantissa = ma;
+            smaller_mantissa = mb;
+            end
+        BGREATER: begin
+            greater_mantissa = mb;
+            smaller_mantissa = ma;
+            end
+        EQUAL: 
+            begin greater_mantissa = ma;
+            smaller_mantissa = mb;
+            end
+        default: begin 
+            greater_mantissa = ma;
+            smaller_mantissa = mb;
+            end
+    endcase
+    end
 
 endmodule
