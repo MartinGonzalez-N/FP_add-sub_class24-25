@@ -20,11 +20,25 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module add_sub #(parameter MANTISSA_WIDTH = 23)(
-    input  [MANTISSA_WIDTH-1:0] ma, mb,
+    input  [MANTISSA_WIDTH+3:0] ma, mb,
     input bit ma_sign, mb_sign, operation_select,
-    output [MANTISSA_WIDTH-1:0] result
+    output reg [MANTISSA_WIDTH+3:0] result,
+    output reg carry_out
     );
     
-    
+    // Internal signals
+    wire [MANTISSA_WIDTH+3:0] operand_a, operand_b; 
+
+    // Apply sign to the mantissas
+    assign operand_a = ma_sign ? -ma : ma; 
+    assign operand_b = mb_sign ? -mb : mb;
+
+    always @(*) begin
+        if (operation_select) begin  // Addition
+            {carry_out, result} = operand_a + operand_b; 
+        end else begin               // Subtraction
+            {carry_out, result} = operand_a - operand_b; 
+        end
+    end
     
 endmodule
