@@ -40,33 +40,40 @@ module add_sub #(parameter WIDTH = 32)(
     assign sign_b = b[31];
 endmodule
 
-module  exp_subtractor (
+module  exp_subtractor (    // Module that represents the exp subtractor block
     logic exp_a,
     logic exp_b,
     logic a_greater, a_less, a_equal
     );    
 
-add_sub  exp_ins (
+add_sub  exp_ins (          // add_sub module instance
 
     .exp_a(exp_a),
-    .exp_b(exp_b)
+    .exp_b(exp_b),
+    .sign_a(sign_a),
+    .sign_b(sign_b)
+    
 );    
 
-    reg [1:0] exp_sub;
-    reg [7:0] exp_op;
+    reg [1:0] exp_disc;     // Exponent discriminant
+    reg [7:0] exp_value;    // Exponent output value
+    reg out_sign;
     //reg exp_sub;
     assign a_greater = exp_a > exp_b;
     assign a_less = exp_a < exp_b;
     assign a_equal = exp_a == exp_b;
 
     always @(*) begin
-        exp_sub = a_greater ? 2'b10 : 
+        exp_disc = a_greater ? 2'b10 : 
         a_less ? 2'b01 :
         a_equal ? 2'b11 : 2'b00; 
     end
     
     always @(*) begin
-    exp_op = (a_greater || a_equal) ? exp_a : exp_b;
+    exp_value = (a_greater || a_equal) ? exp_a : exp_b;
     end   
     
+    always @(*) begin
+    out_sign = a_greater ? sign_a : sign_b;
+    end      
 endmodule    
