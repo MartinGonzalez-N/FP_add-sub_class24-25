@@ -22,8 +22,9 @@
 
 module mantissa_swap #(parameter MANTISSA_WIDTH=23)(
     input [MANTISSA_WIDTH-1:0] ma, mb,
+    input [4:0] shift_spaces,
     input [1:0] exp_magnitude,
-    output [MANTISSA_WIDTH-1:0] greater_mantissa, smaller_mantissa
+    output reg [MANTISSA_WIDTH+3:0] mantissa_a, mantissa_b
 );
 
 //local parameters
@@ -31,12 +32,32 @@ localparam AGREATER = 2'b10;
 localparam BGREATER = 2'b00;
 localparam EQUAL = 2'b11;
 
+// Internal signals
+wire [MANTISSA_WIDTH+3:0] operand_a, operand_b;
 
-case (exp_magnitude)
-    AGREATER: greater_mantissa = ma, smaller_mantissa = mb;
-    BGREATER: greater_mantissa = mb, smaller_mantissa = ma;
-    EQUAL: greater_mantissa = ma, smaller_mantissa = mb;
-    default: greater_mantissa = ma, smaller_mantissa = mb;
-endcase
+assign operand_a = {1'b1, ma, 3'b0};  // Addition of leading, guard, round and sticky bits
+assign operand_b = {1'b1, mb, 3'b0};  // Addition of leading, guard, round and sticky bits
+
+always @(*) begin 
+    case (exp_magnitude)
+        AGREATER: begin
+            mantissa_a = operand_a;
+            mantissa_b = operand_b >> shift_spaces;
+            end
+        BGREATER: begin
+            mantissa_b = operand_b;
+            mantissa_a = operand_a >> shift_spaces;
+            end
+        EQUAL: 
+            begin 
+            mantissa_a = operand_a;
+            mantissa_b = operand_b;
+            end
+        default: begin 
+            mantissa_a = operand_a;
+            mantissa_b = operand_b;
+            end
+    endcase
+end
 
 endmodule
