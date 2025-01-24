@@ -21,10 +21,10 @@
 
 module add_sub #(parameter MANTISSA_WIDTH = 23)(
     input  [MANTISSA_WIDTH-1:0] ma, mb,
-    input bit operation_select,
+    input bit ma_sign, mb_sign, operation_select,
     output [MANTISSA_WIDTH-1:0] result
     );
-
+    
     
     
 endmodule
