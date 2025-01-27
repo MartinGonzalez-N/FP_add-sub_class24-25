@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: Cinvestav
-// Engineer: Dabiel, Lino, Kevin, Emmanuel
+// Engineer: Daniel, Lino, Kevin, Emmanuel
 // 
 // Create Date: 22.01.2025 12:31:55
 // Design Name: Floating Point Adder and Subctractor
