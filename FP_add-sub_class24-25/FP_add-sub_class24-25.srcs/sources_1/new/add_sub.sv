@@ -22,7 +22,7 @@
 #define MANT_BITS 23
 #define EXP_BITS 8
 
-module add_sub #(parameter WIDTH = 32)(
+module add_sub_main #(parameter WIDTH = 32)(
     input  [WIDTH-1:0] a,b,
     input bit operation_select,
     output [WIDTH-1:0] result,
@@ -42,7 +42,7 @@ module add_sub #(parameter WIDTH = 32)(
     
 endmodule
 
-module ieee754_adder_rounder #(parameter WIDTH = 32) (
+module Rounder #(parameter WIDTH = 32) (
     input  logic [WIDTH-1:0] A,  
     input  logic [WIDTH-1:0] B,  
     input  logic op,             
@@ -54,7 +54,7 @@ module ieee754_adder_rounder #(parameter WIDTH = 32) (
     logic [MANT_BITS:0] finalMant;
 
     //Normalize
-    always begin
+    always_comb begin
         if (resultMant[MANT_BITS+1]) begin
             finalMant = resultMant[MANT_BITS+1:1];
             finalExp = expA + 1;
@@ -67,6 +67,7 @@ module ieee754_adder_rounder #(parameter WIDTH = 32) (
         end
     end
 
+    //Rounder
     logic [MANT_BITS-1:0] roundedMant;
     logic roundUp;
 
