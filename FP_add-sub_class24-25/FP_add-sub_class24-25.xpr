@@ -114,7 +114,12 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
+<<<<<<< HEAD
         <Option Name="TopModule" Val="add_sub"/>
+=======
+        <Option Name="TopModule" Val="exp_subtractor"/>
+        <Option Name="TopAutoSet" Val="TRUE"/>
+>>>>>>> e8986510c2fe3a035b8ff24a8b088faf9e9cdc9a
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
@@ -127,7 +132,7 @@
       <Filter Type="Srcs"/>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="add_sub"/>
+        <Option Name="TopModule" Val="exp_subtractor"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
