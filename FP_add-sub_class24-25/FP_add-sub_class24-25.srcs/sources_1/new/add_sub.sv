@@ -19,6 +19,9 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+#define MANT_BITS 23
+#define EXP_BITS 8
+
 module add_sub #(parameter WIDTH = 32)(
     input  [WIDTH-1:0] a,b,
     input bit operation_select,
@@ -51,7 +54,7 @@ module ieee754_adder_rounder #(parameter WIDTH = 32) (
     logic [MANT_BITS:0] finalMant;
 
     //Normalize
-    always_comb begin
+    always begin
         if (resultMant[MANT_BITS+1]) begin
             finalMant = resultMant[MANT_BITS+1:1];
             finalExp = expA + 1;
