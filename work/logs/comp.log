@@ -1,21 +1,356 @@
-TOOL:	xrun(64)	23.09-s001: Started on Jan 28, 2025 at 23:28:24 UTC
+xrun(64): 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun(64)	23.09-s001: Started on Jan 28, 2025 at 23:37:53 UTC
 xrun
 	-f list.f
 		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
 		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
 	-l ./logs/comp.log
 	+define+XCELIUM+
 	-access +rwc
 	-timescale 1ns/1ps
 	-sv
-xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub) could not be determined.
-xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter) could not be determined.
-xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic) could not be determined.
-xrun: *E,FILEMIS: Cannot find the provided file /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic.
-xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic) could not be determined.
-xrun: *E,FILEMIS: Cannot find the provided file /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.
-TOOL:	xrun(64)	23.09-s001: Exiting on Jan 28, 2025 at 23:28:25 UTC  (total: 00:00:01)
+DEFINE std       ./STD
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+DEFINE std       ./STD
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+DEFINE std       ./STD
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+DEFINE std       ./STD
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+DEFINE std       ./STD
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+DEFINE std       ./STD
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
+DEFINE synopsys  ./SYNOPSYS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
+DEFINE ieee      ./IEEE
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
+DEFINE ambit     ./AMBIT
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
+DEFINE vital_memory ./VITAL_MEMORY
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
+DEFINE ncutils ./NCUTILS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
+DEFINE ncinternal ./NCINTERNAL
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
+DEFINE ncmodels ./NCMODELS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
+DEFINE xmutils ./XMUTILS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
+DEFINE xminternal ./XMINTERNAL
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
+DEFINE xmmodels ./XMMODELS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
+DEFINE cds_assertions ./CDS_ASSERTIONS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
+DEFINE cds_inhconn ./CDS_INHCONN
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
+DEFINE cds_spicelib ./CDS_SPICELIB
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
+DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
+|
+xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
+    input logic [MANT_BITS+1:0] resultMant; ,      
+                                          |
+xmvlog: *E,ILLPID (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,23|42): Illegal port decl. [A.1.4][(IEEE-2001)].
+);
+|
+xmvlog: *E,NULLLP (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,26|0): empty/illegal list of ports [A.1.4(IEEE-2001)].
+	module worklib.Normalize_Rounder:sv
+		errors: 2, warnings: 0
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
+	module worklib.mantissa_add_sub:sv
+		errors: 0, warnings: 0
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
+	module worklib.mantissa_shifter:sv
+		errors: 0, warnings: 0
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
+        out_sign = a_greater ? sign_a : sign_b;
+                                    |
+xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv,57|36): 'sign_a': undeclared identifier [12.5(IEEE)].
+        out_sign = a_greater ? sign_a : sign_b;
+                                             |
+xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv,57|45): 'sign_b': undeclared identifier [12.5(IEEE)].
+	module worklib.Exponent_sub_upd:sv
+		errors: 2, warnings: 0
+	module worklib.right_shift:sv
+		errors: 0, warnings: 0
+	module worklib.exp_update:sv
+		errors: 0, warnings: 0
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
+    assign mantissa_b = b[22:0];
+                        |
+xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,20|24): 'b': undeclared identifier [12.5(IEEE)].
+    assign exp_b = b[30:23];
+                   |
+xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,21|19): 'b': undeclared identifier [12.5(IEEE)].
+    assign sign_b = b[31];
+                    |
+xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,22|20): 'b': undeclared identifier [12.5(IEEE)].
+	module worklib.sign_logic:sv
+		errors: 3, warnings: 0
+file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
+import GlobalParams::*;
+                  |
+xmvlog: *E,NOPBIND (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,22|18): Package GlobalParams could not be bound.
+    wire [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted
+       |
+xmvlog: *E,EXPCOM (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,34|7): expecting a comma [3.2.1][6.1(IEEE)].
+    sign_logic sign_Ins(.WIDTH(WIDTH))(
+                                      |
+xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,48|38): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+    );
+    |
+xmvlog: *E,PLMIXU (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,52|4): ordered and named port list mixed syntax [12.3.3][12.3.4(IEEE)].
+    Exponent_sub_upd Exp_Ins(.EXP(EXP_BITS))(
+                                            |
+xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,55|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+    mantissa_swap mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
+                                                               |
+xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,61|63): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+    add_sub_mantissa mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
+                                                                  |
+xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,70|66): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+    Normalize_Rounder NR_Inst(.WIDTH(WIDTH))(
+                                            |
+xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,80|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+	module worklib.add_sub_main:sv
+		errors: 7, warnings: 0
+	Total errors/warnings found outside modules and primitives:
+		errors: 1, warnings: 15
+xrun: *E,VLGERR: An error occurred during parsing.  Review the log file for errors with the code *E and fix those identified problems to proceed.  Exiting with code (status 1).
+TOOL:	xrun(64)	23.09-s001: Exiting on Jan 28, 2025 at 23:37:54 UTC  (total: 00:00:01)

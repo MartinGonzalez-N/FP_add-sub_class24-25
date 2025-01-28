@@ -1,17 +1,26 @@
-# agregar en este archivo la ruta desde el directorio work hacia los
-# archivos de rtl y testbenches.
-#
-# ejemplo
-# ../rtl/adder.sv
-#
-# donde
-# .. es regresarse un directorio hacia atras
-# rtl es la carpeta donde esta el rtl
-# adder.sv es el archivo que se compilara 
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-XLMODE
+./xcelium.d/run.lnx8664.23.09.d
+-RUNMODE
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
-
+-DEFINE
+XCELIUM
+-sv
+-CDSLIB
+./xcelium.d/run.lnx8664.23.09.d/cdsrun.lib
+-HDLVAR
+./xcelium.d/run.lnx8664.23.09.d/hdlrun.var
+-no_analogsolver
+-MESSAGES
+-UPDATE
+-XLLIBSTORE
+./xcelium.d/run.lnx8664.23.09.d/xllibs
+-ALLOWUNBOUND
