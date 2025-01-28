@@ -1,0 +1,21 @@
+TOOL:	xrun(64)	23.09-s001: Started on Jan 28, 2025 at 23:28:24 UTC
+xrun
+	-f list.f
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic
+		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
+	-l ./logs/comp.log
+	+define+XCELIUM+
+	-access +rwc
+	-timescale 1ns/1ps
+	-sv
+xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub) could not be determined.
+xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter) could not be determined.
+xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic) could not be determined.
+xrun: *E,FILEMIS: Cannot find the provided file /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_logic.
+xrun: *E,FMUK: The type of the file (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic) could not be determined.
+xrun: *E,FILEMIS: Cannot find the provided file /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.
+TOOL:	xrun(64)	23.09-s001: Exiting on Jan 28, 2025 at 23:28:25 UTC  (total: 00:00:01)
