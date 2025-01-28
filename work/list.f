@@ -8,7 +8,7 @@
 # .. es regresarse un directorio hacia atras
 # rtl es la carpeta donde esta el rtl
 # adder.sv es el archivo que se compilara 
-# Yevin se la come
+# Yevin se la come entera
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub
 /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter
