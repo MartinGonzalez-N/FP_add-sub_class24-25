@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-import GlobalParams::*;
+import global_params::*;
 
 module add_sub_main #(parameter WIDTH = 32)(
     input  [WIDTH-1:0] a,b,
@@ -45,21 +45,21 @@ module add_sub_main #(parameter WIDTH = 32)(
     assign exp_b = b[30:23];
     assign sign_b = b[31];
 
-    sign_logic sign_Ins(.WIDTH(WIDTH))(
+    sign_logic sign_ins(.WIDTH(WIDTH))(
         .X(a),
         .Y(b),
         .operation_select(operation_select),
     );
 
 
-    Exponent_sub_upd Exp_Ins(.EXP(EXP_BITS))(
+    exponent_sub_upd exp_ins(.EXP(EXP_BITS))(
         .exp_a(exp_a),
         .exp_b(exp_b),
         .a_greater(a_greater)
     );
 
-    mantissa_swap mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
-        .ma(mantissa_s),
+    mantissa_shifter mantissa_shifter_ins(.MANTISSA_WIDTH(MANT_BITS))(
+        .ma(mantissa_a),
         .mb(mantissa_b),
         .mantissa_a(mantissa_a_shifted),
         .mantissa_b(mantissa_b_shifted)
@@ -77,7 +77,7 @@ module add_sub_main #(parameter WIDTH = 32)(
         .carry_out(carry_out)
     );
 
-    Normalize_Rounder NR_Inst(.WIDTH(WIDTH))(
+    normalize_rounder nr_inst(.WIDTH(WIDTH))(
         .mantissa_result_shifted(resultMant),      
         .exp_result(exp_result),
         .R(mantissa_result)
