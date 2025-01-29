@@ -1,0 +1,7 @@
+xmvlog(64): 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+    input bit ma_sign, mb_sign, operation_select,
+                    |
+xmvlog: *E,EXPCORP (mantissa_add_sub.sv,24|20): Expecting a ',' or ')' [A.1.4(IEEE-2001)].
+    input bit ma_sign, mb_sign, operation_select,
+                    |
+xmvlog: *E,EXPCORP (mantissa_add_sub.sv,24|20): Expecting a ',' or ')' [12.3.2(IEEE)].
