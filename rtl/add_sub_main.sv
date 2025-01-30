@@ -20,7 +20,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
-import GlobalParams::*;
+import global_params::*;
 
 module add_sub_main #(parameter WIDTH = 32)(
     input  [WIDTH-1:0] a,b,
@@ -80,8 +80,8 @@ module add_sub_main #(parameter WIDTH = 32)(
         .carry_out(carry_out)
     );
 
-    normalize_rounder NR_Inst(.WIDTH(WIDTH))(
-        .mantissa_result_shifted(result_mant),      
+    normalize_rounder nr_inst(.WIDTH(WIDTH))(
+        .result_mant(mantissa_result_shifted),      
         .exp_result(exp_result),
         .R(mantissa_result)
     );

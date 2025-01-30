@@ -21,7 +21,7 @@
 
 module mantissa_add_sub #(parameter MANTISSA_WIDTH = 23)(
     input  [MANTISSA_WIDTH+3:0] ma, mb,
-    input bit ma_sign, mb_sign, operation_select,
+    input ma_sign, mb_sign, operation_select,
     output reg [MANTISSA_WIDTH+3:0] result,
     output reg carry_out
     );
