@@ -7,11 +7,14 @@
 # donde
 # .. es regresarse un directorio hacia atras
 # rtl es la carpeta donde esta el rtl
-# adder.sv es el archivo que se compilara 
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
-/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
+# adder.sv es el archivo que se compilara
 
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/global_params.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/normalize_rounder.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/sign_logic.sv
+/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
+
+ 

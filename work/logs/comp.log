@@ -1,13 +1,14 @@
 xrun(64): 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun(64)	23.09-s001: Started on Jan 28, 2025 at 23:37:53 UTC
+TOOL:	xrun(64)	23.09-s001: Started on Jan 30, 2025 at 22:50:46 UTC
 xrun
 	-f list.f
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
-		/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/global_params.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/normalize_rounder.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/sign_logic.sv
+		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
 	-l ./logs/comp.log
 	+define+XCELIUM+
 	-access +rwc
@@ -283,74 +284,232 @@ xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): 
 DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
 |
 xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-    input logic [MANT_BITS+1:0] result_mant; ,      
-                                          |
-xmvlog: *E,ILLPID (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,23|42): Illegal port decl. [A.1.4][(IEEE-2001)].
-);
-|
-xmvlog: *E,NULLLP (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,26|0): empty/illegal list of ports [A.1.4(IEEE-2001)].
-	module worklib.normalize_rounder:sv
-		errors: 2, warnings: 0
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
-	module worklib.mantissa_add_sub:sv
-		errors: 0, warnings: 0
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
-	module worklib.mantissa_shifter:sv
-		errors: 0, warnings: 0
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
-        out_sign = a_greater ? sign_a : sign_b;
-                                    |
-xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv,57|36): 'sign_a': undeclared identifier [12.5(IEEE)].
-        out_sign = a_greater ? sign_a : sign_b;
-                                             |
-xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv,57|45): 'sign_b': undeclared identifier [12.5(IEEE)].
-	module worklib.exponent_sub_upd:sv
-		errors: 2, warnings: 0
-	module worklib.right_shift:sv
-		errors: 0, warnings: 0
-	module worklib.exp_update:sv
-		errors: 0, warnings: 0
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv
-    assign mantissa_b = b[22:0];
+file: /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
+    logic input  [WIDTH-1:0] a,b,
+              |
+xmvlog: *E,EXPNDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,26|14): expecting a <list_of_variables> or <list_of_assignments> [3.2.1(IEEE)].
+    logic input bit operation_select,
+              |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,27|14): expecting at least one register variable [3.2.2(IEEE)].
+    logic input clk,
+              |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,28|14): expecting at least one register variable [3.2.2(IEEE)].
+    logic output [WIDTH-1:0] result,
+               |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,29|15): expecting at least one register variable [3.2.2(IEEE)].
+    logic output sign_a, sign_b, sign_result,
+               |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,30|15): expecting at least one register variable [3.2.2(IEEE)].
+    logic output [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result,
+               |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,31|15): expecting at least one register variable [3.2.2(IEEE)].
+    logic output [EXP_BITS-1:0] exp_a, exp_b, exp_result,
+               |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,32|15): expecting at least one register variable [3.2.2(IEEE)].
+    logic output a_greater,
+               |
+xmvlog: *E,EXP1RD (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,33|15): expecting at least one register variable [3.2.2(IEEE)].
+    sign_logic sign_ins #(.WIDTH(WIDTH)) ( 
+                      |
+xmvlog: *E,ILLPDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,49|22): Mixing of ansi & non-ansi style port declaration is not legal.
+    sign_logic sign_ins #(.WIDTH(WIDTH)) ( 
                         |
-xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,20|24): 'b': undeclared identifier [12.5(IEEE)].
-    assign exp_b = b[30:23];
-                   |
-xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,21|19): 'b': undeclared identifier [12.5(IEEE)].
-    assign sign_b = b[31];
-                    |
-xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/sign_logic.sv,22|20): 'b': undeclared identifier [12.5(IEEE)].
-	module worklib.sign_logic:sv
-		errors: 3, warnings: 0
-file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv
-import GlobalParams::*;
-                  |
-xmvlog: *E,NOPBIND (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,22|18): Package GlobalParams could not be bound.
-    wire [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted
-       |
-xmvlog: *E,EXPCOM (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,34|7): expecting a comma [3.2.1][6.1(IEEE)].
-    sign_logic sign_ins(.WIDTH(WIDTH))(
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,49|24): expecting a semicolon (';') [SystemVerilog].
+    sign_logic sign_ins #(.WIDTH(WIDTH)) ( 
+                                |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,49|32): expecting a semicolon (';') [12.3.2(IEEE)].
+    sign_logic sign_ins #(.WIDTH(WIDTH)) ( 
                                       |
-xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,48|38): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
-    );
-    |
-xmvlog: *E,PLMIXU (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,52|4): ordered and named port list mixed syntax [12.3.3][12.3.4(IEEE)].
-    exponent_sub_upd exp_ins(.EXP_WIDTH(EXP_BITS))(
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,49|38): expecting a semicolon (';') [12.3.2(IEEE)].
+        .X(a),
+          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,50|10): expecting a semicolon (';') [12.3.2(IEEE)].
+        .X(a),
+            |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,50|12): expecting a semicolon (';') [12.3.2(IEEE)].
+        .Y(b),
+          |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,51|10): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .Y(b),
+            |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,51|12): expecting a semicolon (';') [12.3.2(IEEE)].
+        .operation_select(operation_select)
+                         |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,52|25): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .operation_select(operation_select)
+                                          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,52|42): expecting a semicolon (';') [12.3.2(IEEE)].
+    exponent_sub_upd exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
+                           |
+xmvlog: *E,ILLPDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,56|27): Mixing of ansi & non-ansi style port declaration is not legal.
+    exponent_sub_upd exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
+                             |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,56|29): expecting a semicolon (';') [SystemVerilog].
+    exponent_sub_upd exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
+                                         |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,56|41): expecting a semicolon (';') [12.3.2(IEEE)].
+    exponent_sub_upd exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
+                                                  |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,56|50): expecting a semicolon (';') [12.3.2(IEEE)].
+        .exp_a(exp_a),
+              |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,57|14): expecting a semicolon (';') [12.3.2(IEEE)].
+        .exp_a(exp_a),
+                    |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,57|20): expecting a semicolon (';') [12.3.2(IEEE)].
+        .exp_b(exp_b),
+              |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,58|14): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .exp_b(exp_b),
+                    |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,58|20): expecting a semicolon (';') [12.3.2(IEEE)].
+        .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
+                  |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,59|18): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
+                            |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,59|28): expecting a semicolon (';') [12.3.2(IEEE)].
+        .a_equal(),                             // I made some changes to the module: input[] instead of logic
+                |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,60|16): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .shift_spaces(shift_spaces)
+                     |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,61|21): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .shift_spaces(shift_spaces)
+                                  |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,61|34): expecting a semicolon (';') [12.3.2(IEEE)].
+    mantissa_shifter mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                        |
+xmvlog: *E,ILLPDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,64|40): Mixing of ansi & non-ansi style port declaration is not legal.
+    mantissa_shifter mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,64|42): expecting a semicolon (';') [SystemVerilog].
+    mantissa_shifter mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                                           |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,64|59): expecting a semicolon (';') [12.3.2(IEEE)].
+    mantissa_shifter mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                                                     |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,64|69): expecting a semicolon (';') [12.3.2(IEEE)].
+        .ma(mantissa_s),
+           |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,65|11): expecting a semicolon (';') [12.3.2(IEEE)].
+        .ma(mantissa_s),
+                      |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,65|22): expecting a semicolon (';') [12.3.2(IEEE)].
+        .mb(mantissa_b),
+           |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,66|11): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mb(mantissa_b),
+                      |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,66|22): expecting a semicolon (';') [12.3.2(IEEE)].
+        .shift_spaces(shift_spaces),
+                     |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,67|21): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .shift_spaces(shift_spaces),
+                                  |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,67|34): expecting a semicolon (';') [12.3.2(IEEE)].
+        .exp_magnitude(/* 2 bit magnitude signal fromexponent_sub_upd module */),
+                      |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,68|22): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mantissa_a(mantissa_a_shifted),
+                   |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,69|19): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mantissa_a(mantissa_a_shifted),
+                                      |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,69|38): expecting a semicolon (';') [12.3.2(IEEE)].
+        .mantissa_b(mantissa_b_shifted)
+                   |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,70|19): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mantissa_b(mantissa_b_shifted)
+                                      |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,70|38): expecting a semicolon (';') [12.3.2(IEEE)].
+    mantissa_add_sub mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                        |
+xmvlog: *E,ILLPDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,73|40): Mixing of ansi & non-ansi style port declaration is not legal.
+    mantissa_add_sub mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,73|42): expecting a semicolon (';') [SystemVerilog].
+    mantissa_add_sub mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                                           |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,73|59): expecting a semicolon (';') [12.3.2(IEEE)].
+    mantissa_add_sub mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+                                                                     |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,73|69): expecting a semicolon (';') [12.3.2(IEEE)].
+        .ma(mantissa_a_shifted),
+           |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,74|11): expecting a semicolon (';') [12.3.2(IEEE)].
+        .ma(mantissa_a_shifted),
+                              |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,74|30): expecting a semicolon (';') [12.3.2(IEEE)].
+        .mb(mantissa_b_shifted),
+           |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,75|11): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mb(mantissa_b_shifted),
+                              |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,75|30): expecting a semicolon (';') [12.3.2(IEEE)].
+        .ma_sign(sign_a),
+                |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,76|16): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .ma_sign(sign_a),
+                       |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,76|23): expecting a semicolon (';') [12.3.2(IEEE)].
+        .mb_sign(sign_b),
+                |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,77|16): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .mb_sign(sign_b),
+                       |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,77|23): expecting a semicolon (';') [12.3.2(IEEE)].
+        .operation_select(operation_select),
+                         |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,78|25): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .operation_select(operation_select),
+                                          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,78|42): expecting a semicolon (';') [12.3.2(IEEE)].
+        .result(mantissa_result_shifted),
+               |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,79|15): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .result(mantissa_result_shifted),
+                                       |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,79|39): expecting a semicolon (';') [12.3.2(IEEE)].
+        .carry_out(carry_out)
+                  |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,80|18): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .carry_out(carry_out)
+                            |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,80|28): expecting a semicolon (';') [12.3.2(IEEE)].
+    normalize_rounder nr_inst #(.WIDTH(WIDTH)) ( 
+                            |
+xmvlog: *E,ILLPDL (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,83|28): Mixing of ansi & non-ansi style port declaration is not legal.
+    normalize_rounder nr_inst #(.WIDTH(WIDTH)) ( 
+                              |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,83|30): expecting a semicolon (';') [SystemVerilog].
+    normalize_rounder nr_inst #(.WIDTH(WIDTH)) ( 
+                                      |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,83|38): expecting a semicolon (';') [12.3.2(IEEE)].
+    normalize_rounder nr_inst #(.WIDTH(WIDTH)) ( 
                                             |
-xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,55|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
-    mantissa_swap mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
-                                                               |
-xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,61|63): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
-    add_sub_mantissa mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
-                                                                  |
-xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,70|66): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
-    normalize_rounder NR_Inst(.WIDTH(WIDTH))(
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,83|44): expecting a semicolon (';') [12.3.2(IEEE)].
+        .result_mant(mantissa_result_shifted),      
+                    |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,84|20): expecting a semicolon (';') [12.3.2(IEEE)].
+        .result_mant(mantissa_result_shifted),      
                                             |
-xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,80|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,84|44): expecting a semicolon (';') [12.3.2(IEEE)].
+        .exp_result(exp_result),
+                   |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,85|19): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .exp_result(exp_result),
+                              |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,85|30): expecting a semicolon (';') [12.3.2(IEEE)].
+        .R(mantissa_result)
+          |
+xmvlog: *E,EXPIDN (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,86|10): expecting an identifier [13.3.2][3.2.1(IEEE)].
+        .R(mantissa_result)
+                          |
+xmvlog: *E,EXPSMC (/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv,86|26): expecting a semicolon (';') [12.3.2(IEEE)].
 	module worklib.add_sub_main:sv
-		errors: 7, warnings: 0
+		errors: 74, warnings: 0
 	Total errors/warnings found outside modules and primitives:
-		errors: 1, warnings: 15
+		errors: 0, warnings: 15
 xrun: *E,VLGERR: An error occurred during parsing.  Review the log file for errors with the code *E and fix those identified problems to proceed.  Exiting with code (status 1).
-TOOL:	xrun(64)	23.09-s001: Exiting on Jan 28, 2025 at 23:37:54 UTC  (total: 00:00:01)
+TOOL:	xrun(64)	23.09-s001: Exiting on Jan 30, 2025 at 22:50:46 UTC  (total: 00:00:00)

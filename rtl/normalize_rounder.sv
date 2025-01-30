@@ -19,10 +19,10 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module normalize_rounder(PARAMETER WIDTH) (
-    input logic [MANT_BITS+3:0] result_mant,  // 23 bits + 4 extra (por la suma/resta)
-    input logic [EXP_BITS-1:0] exp_result,    // Exponente en IEEE 754
-    output logic [WIDTH-1:0] R            // Resultado final IEEE 754
+module normalize_rounder #(parameter WIDTH = 32) (
+    input logic [26:0] result_mant,  // 23 bits + 4 extra (por la suma/resta)
+    input logic [7:0] exp_result,    // Exponente en IEEE 754
+    output logic [31:0] R            // Resultado final IEEE 754
 );
 
     logic [7:0] final_exp;

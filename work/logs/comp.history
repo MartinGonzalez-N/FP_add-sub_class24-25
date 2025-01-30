@@ -1,1 +1,13 @@
 s1(28Jan2025:23:37:54):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s2(30Jan2025:22:08:28):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s3(30Jan2025:22:18:44):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s4(30Jan2025:22:24:34):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s5(30Jan2025:22:30:57):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s6(30Jan2025:22:33:23):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s7(30Jan2025:22:34:26):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s8(30Jan2025:22:36:36):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s9(30Jan2025:22:37:40):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s10(30Jan2025:22:38:48):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s11(30Jan2025:22:40:45):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s12(30Jan2025:22:44:50):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s13(30Jan2025:22:50:46):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 

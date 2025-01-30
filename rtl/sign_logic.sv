@@ -16,10 +16,6 @@ module sign_logic #(parameter WIDTH = 32)(
     
     assign mantisa_a = X[22:0];
     assign exp_a = X[30:23];
-        
-    assign mantissa_b = b[22:0];
-    assign exp_b = b[30:23];
-    assign sign_b = b[31];
 
     assign mantisa_b = Y[22:0];
     assign exp_b = Y[30:23];
