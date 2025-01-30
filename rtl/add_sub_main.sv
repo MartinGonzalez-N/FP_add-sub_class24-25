@@ -46,14 +46,14 @@ module add_sub_main #(parameter WIDTH = 32)(
     assign exp_b = b[30:23];
     assign sign_b = b[31];
 
-    sign_logic sign_ins #(.WIDTH(WIDTH)) ( 
+    sign_logic #(WIDTH) sign_ins #(.WIDTH(WIDTH)) ( 
         .X(a),
         .Y(b),
         .operation_select(operation_select)
     );
 
 
-    exponent_sub_upd exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
+    exponent_sub_upd #(EXP_WIDTH) exp_ins #(.EXP_WIDTH(EXP_BITS)) ( 
         .exp_a(exp_a),
         .exp_b(exp_b),
         .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
@@ -61,7 +61,7 @@ module add_sub_main #(parameter WIDTH = 32)(
         .shift_spaces(shift_spaces)
     );
 
-    mantissa_shifter mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+    mantissa_shifter #(MANTISSA_WIDTH) mantissa_shifter_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
         .ma(mantissa_s),
         .mb(mantissa_b),
         .shift_spaces(shift_spaces),
@@ -70,7 +70,7 @@ module add_sub_main #(parameter WIDTH = 32)(
         .mantissa_b(mantissa_b_shifted)
     );
 
-    mantissa_add_sub mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
+    mantissa_add_sub #(MANTISSA_WIDTH) mantissa_add_sub_ins #(.MANTISSA_WIDTH(MANT_BITS)) ( 
         .ma(mantissa_a_shifted),
         .mb(mantissa_b_shifted),
         .ma_sign(sign_a),
@@ -80,7 +80,7 @@ module add_sub_main #(parameter WIDTH = 32)(
         .carry_out(carry_out)
     );
 
-    normalize_rounder nr_inst #(.WIDTH(WIDTH)) ( 
+    normalize_rounder #(WIDTH) nr_inst #(.WIDTH(WIDTH)) ( 
         .result_mant(mantissa_result_shifted),      
         .exp_result(exp_result),
         .R(mantissa_result)
