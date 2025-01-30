@@ -24,18 +24,18 @@ import global_params::*;
 
 module add_sub_main #(parameter WIDTH = 32)(
     logic input  [WIDTH-1:0] a,b,
-    logic input bit operation_select,
+    logic operation_select,
     logic input clk,
     logic output [WIDTH-1:0] result,
     logic output sign_a, sign_b, sign_result,
     logic output [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result,
     logic output [EXP_BITS-1:0] exp_a, exp_b, exp_result,
-    logic output a_greater,
-    logic [4:0] shift_spaces,
-    logic [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted
+    logic output a_greater
 );
 
     logic carry_out;
+    logic [4:0] shift_spaces;
+    logic [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted;
 
     //Separate sign, exponent and mantissa values for both inputs
     assign mantissa_a = a[22:0];
