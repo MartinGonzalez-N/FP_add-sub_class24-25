@@ -22,10 +22,10 @@
 
 module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represents the EXP_WIDTH subtractor block
     input [EXP_WIDTH-1: 0] exp_a, exp_b,
-    output bit a_greater, a_less, a_equal,
+    wire a_greater, a_less, a_equal,
     output reg [4:0] shift_spaces,
     input sign_a, sign_b,
-    output reg [EXP_WIDTH-7:0] exp_disc,
+    output reg [1:0] exp_disc,
     output reg [EXP_WIDTH-1:0] exp_value,
     output reg out_sign    
 );    

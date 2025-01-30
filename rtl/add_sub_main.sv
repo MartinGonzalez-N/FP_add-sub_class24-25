@@ -65,7 +65,7 @@ module add_sub_main #(parameter WIDTH = 32)(
         .ma(mantissa_s),
         .mb(mantissa_b),
         .shift_spaces(shift_spaces),
-        .exp_magnitude(/* 2 bit magnitude signal fromexponent_sub_upd module */),
+        .exp_magnitude(exp_disc),
         .mantissa_a(mantissa_a_shifted),
         .mantissa_b(mantissa_b_shifted)
     );
