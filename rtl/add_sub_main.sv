@@ -16,7 +16,8 @@
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 
+// 											Just testing the git commits
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 import global_params::*;
@@ -30,7 +31,7 @@ module add_sub_main #(parameter WIDTH = 32)(
     output [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result,
     output [EXP_BITS-1:0] exp_a, exp_b, exp_result,
     output a_greater,
-    wire [4:0] shift_spaces
+    wire [4:0] shift_spaces,
     wire [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted
 );
 
@@ -52,22 +53,24 @@ module add_sub_main #(parameter WIDTH = 32)(
     );
 
 
-    exponent_sub_upd exp_ins(.EXP(EXP_BITS))(
+    exponent_sub_upd exp_ins(.EXP_WIDTH(EXP_BITS))(
         .exp_a(exp_a),
         .exp_b(exp_b),
-        .a_greater(a_greater)
+        .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
+        .a_equal(),                             // I made some changes to the module: input[] instead of logic
+        .shift_spaces(shift_spaces)
     );
 
     mantissa_shifter mantissa_shifter_ins(.MANTISSA_WIDTH(MANT_BITS))(
-        .ma(mantissa_a),
+        .ma(mantissa_s),
         .mb(mantissa_b),
+        .shift_spaces(shift_spaces),
+        .exp_magnitude(/* 2 bit magnitude signal fromexponent_sub_upd module */),
         .mantissa_a(mantissa_a_shifted),
         .mantissa_b(mantissa_b_shifted)
     );
 
-    //TODO: Add Shifter instance
-
-    add_sub_mantissa mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
+    mantissa_add_sub mantissa_add_sub_ins(.MANTISSA_WIDTH(MANT_BITS))(
         .ma(mantissa_a_shifted),
         .mb(mantissa_b_shifted),
         .ma_sign(sign_a),
@@ -77,8 +80,8 @@ module add_sub_main #(parameter WIDTH = 32)(
         .carry_out(carry_out)
     );
 
-    normalize_rounder nr_inst(.WIDTH(WIDTH))(
-        .mantissa_result_shifted(resultMant),      
+    normalize_rounder nr_Inst(.WIDTH(WIDTH))(
+        .mantissa_result_shifted(result_mant),      
         .exp_result(exp_result),
         .R(mantissa_result)
     );

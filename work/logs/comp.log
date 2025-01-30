@@ -284,13 +284,13 @@ DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
 |
 xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
 file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-    input logic [MANT_BITS+1:0] resultMant; ,      
+    input logic [MANT_BITS+1:0] result_mant; ,      
                                           |
 xmvlog: *E,ILLPID (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,23|42): Illegal port decl. [A.1.4][(IEEE-2001)].
 );
 |
 xmvlog: *E,NULLLP (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/normalize_rounder.sv,26|0): empty/illegal list of ports [A.1.4(IEEE-2001)].
-	module worklib.Normalize_Rounder:sv
+	module worklib.normalize_rounder:sv
 		errors: 2, warnings: 0
 file: /home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
 	module worklib.mantissa_add_sub:sv
@@ -305,7 +305,7 @@ xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/
         out_sign = a_greater ? sign_a : sign_b;
                                              |
 xmvlog: *E,UNDIDN (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv,57|45): 'sign_b': undeclared identifier [12.5(IEEE)].
-	module worklib.Exponent_sub_upd:sv
+	module worklib.exponent_sub_upd:sv
 		errors: 2, warnings: 0
 	module worklib.right_shift:sv
 		errors: 0, warnings: 0
@@ -330,13 +330,13 @@ xmvlog: *E,NOPBIND (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl
     wire [MANT_BITS+3:0] mantissa_a_shifted, mantissa_b_shifted, mantissa_result_shifted
        |
 xmvlog: *E,EXPCOM (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,34|7): expecting a comma [3.2.1][6.1(IEEE)].
-    sign_logic sign_Ins(.WIDTH(WIDTH))(
+    sign_logic sign_ins(.WIDTH(WIDTH))(
                                       |
 xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,48|38): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
     );
     |
 xmvlog: *E,PLMIXU (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,52|4): ordered and named port list mixed syntax [12.3.3][12.3.4(IEEE)].
-    Exponent_sub_upd Exp_Ins(.EXP(EXP_BITS))(
+    exponent_sub_upd exp_ins(.EXP_WIDTH(EXP_BITS))(
                                             |
 xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,55|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
     mantissa_swap mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
@@ -345,7 +345,7 @@ xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/
     add_sub_mantissa mantissa_swap_ins(.MANTISSA_WIDTH(MANT_BITS))(
                                                                   |
 xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,70|66): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
-    Normalize_Rounder NR_Inst(.WIDTH(WIDTH))(
+    normalize_rounder NR_Inst(.WIDTH(WIDTH))(
                                             |
 xmvlog: *E,EXPSMC (/home/disdig/dd_C1_25/add_sub_c125/FP_add-sub_class24-25/rtl/add_sub_main.sv,80|44): expecting a semicolon (';') [12.1.2][7.1(IEEE)].
 	module worklib.add_sub_main:sv

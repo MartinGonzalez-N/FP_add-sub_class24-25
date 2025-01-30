@@ -5,7 +5,7 @@
 // 
 // Create Date: 01/27/2025 12:20:58 AM
 // Design Name: 
-// Module Name: Exponent_sub_upd
+// Module Name: exponent_sub_upd
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,58 +20,37 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module  Exponent_sub_upd #(parameter EXP = 8)(    // Module that represents the exp subtractor block
-    logic exp_a,
-    logic exp_b,
-    logic a_greater, a_less, a_equal
+module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represents the EXP_WIDTH subtractor block
+    input [EXP_WIDTH-1: 0] exp_a, exp_b,
+    output bit a_greater, a_less, a_equal,
+    output reg [4:0] shift_spaces,
+    input sign_a, sign_b,
+    output reg [EXP_WIDTH-7:0] exp_disc,
+    output reg [EXP_WIDTH-1:0] exp_value,
+    output reg out_sign    
 );    
 
-/* add_sub  exp_ins (          // add_sub module instance
+    assign a_greater = exp_a > exp_b;        // Compare
+    assign a_less = exp_a < exp_b;           // Imput 
+    assign a_equal = exp_a == exp_b;         // Exponents
 
-    .exp_a(exp_a),
-    .exp_b(exp_b),
-    .sign_a(sign_a),
-    .sign_b(sign_b)
-    
-);  */   
-
-    reg [EXP-7:0] exp_disc;     // Exponent discriminant
-    reg [EXP-1:0] exp_value;    // Exponent output value
-    reg out_sign;
-    //reg exp_sub;
-    assign a_greater = exp_a > exp_b;
-    assign a_less = exp_a < exp_b;
-    assign a_equal = exp_a == exp_b;
-
-    always @(*) begin
+    always @(*) begin                        // Determins output case
         exp_disc = a_greater ? 2'b10 : 
-        a_less ? 2'b01 :
-        a_equal ? 2'b11 : 2'b00; 
+        a_less ? 2'b00 :
+        a_equal ? 2'b11 : 2'b01; 
     end
     
     always @(*) begin
-        exp_value = (a_greater || a_equal) ? exp_a : exp_b;
+        exp_value = (a_greater || a_equal) ? exp_a : exp_b;    // Outputs greater exponent
     end   
     
     always @(*) begin
-        out_sign = a_greater ? sign_a : sign_b;
+        out_sign = a_greater ? sign_a : sign_b;                // Outputs sign
     end      
+
+    always @(*) begin
+        shift_spaces = a_greater ? exp_a - exp_b : 
+                    a_less ? exp_b - exp_a : 8'b00000000;
+    end 
+    
 endmodule 
-
-module right_shift #(parameter MANT = 23) (
-    input [MANT-1:0] smaller_mantissa,
-    input [7:0] shift_spaces,
-    output [MANT-1:0] shifted_mantissa
-);
-
-    assign shifted_mantissa = smaller_mantissa >> shift_spaces;          
-endmodule      
-
-// Pending
-module exp_update (
-    input [7:0] shift_spaces,
-    input shift_dir       
-);
-    
-    
-endmodule
