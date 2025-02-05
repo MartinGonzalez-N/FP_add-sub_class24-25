@@ -22,7 +22,6 @@
 
 module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represents the EXP_WIDTH subtractor block
     input [EXP_WIDTH-1: 0] exp_a, exp_b,
-    wire a_greater, a_less, a_equal,
     output reg [4:0] shift_spaces,
     input sign_a, sign_b,
     output reg [1:0] exp_disc,
@@ -30,9 +29,11 @@ module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represent
     output reg out_sign    
 );    
 
-    assign a_greater = exp_a > exp_b;        // Compare
-    assign a_less = exp_a < exp_b;           // Imput 
-    assign a_equal = exp_a == exp_b;         // Exponents
+    wire a_greater, a_less, a_equal;
+
+    assign a_greater = (exp_a > exp_b);        // Compare
+    assign a_less = (exp_a < exp_b);           // Imput 
+    assign a_equal = (exp_a == exp_b);         // Exponents
 
     always @(*) begin                        // Determins output case
         exp_disc = a_greater ? 2'b10 : 
