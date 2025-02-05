@@ -69,6 +69,8 @@ module add_sub_main #(parameter WIDTH = 32)(
         .exp_b(exp_b),
         // .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
         // .a_equal(),                             // I made some changes to the module: input[] instead of logic
+       .sign_a(sign_a),
+       .sign_b(sign_b),
         .shift_spaces(shift_spaces)
     );
 

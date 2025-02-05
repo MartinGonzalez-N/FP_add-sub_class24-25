@@ -37,3 +37,6 @@ s36(31Jan2025:01:40:00):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -ac
 s37(31Jan2025:01:41:32):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
 s38(31Jan2025:01:41:54):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
 s39(31Jan2025:01:47:56):  xrun ../rtl/normalize_rounder.sv 
+s40(31Jan2025:01:48:16):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s41(05Feb2025:20:34:02):  xrun -f list.f -l ./logs/comp.log +define+XCELIUM+ -access +rwc -timescale 1ns/1ps -sv 
+s42(05Feb2025:20:53:32):  xrun ../rtl/add_sub_main.sv 

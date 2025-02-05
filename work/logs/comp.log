@@ -1,5 +1,5 @@
 xrun(64): 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun(64)	23.09-s001: Started on Feb 05, 2025 at 20:34:02 UTC
+TOOL:	xrun(64)	23.09-s001: Started on Feb 05, 2025 at 21:43:27 UTC
 xrun
 	-f list.f
 		/home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/global_params.sv
@@ -194,54 +194,6 @@ xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cd
 DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
 |
 xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
-Recompiling... reason: file '../rtl/normalize_rounder.sv' is newer than expected.
-	expected: Fri Jan 31 01:45:59 2025
-	actual:   Wed Feb  5 20:11:34 2025
-DEFINE std       ./STD
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
-DEFINE synopsys  ./SYNOPSYS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,2): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/SYNOPSYS' (cds.lib command ignored).
-DEFINE ieee      ./IEEE
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,3): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/IEEE' (cds.lib command ignored).
-DEFINE ambit     ./AMBIT
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,4): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/AMBIT' (cds.lib command ignored).
-DEFINE vital_memory ./VITAL_MEMORY
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,5): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/VITAL_MEMORY' (cds.lib command ignored).
-DEFINE ncutils ./NCUTILS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,6): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCUTILS' (cds.lib command ignored).
-DEFINE ncinternal ./NCINTERNAL
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,7): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCINTERNAL' (cds.lib command ignored).
-DEFINE ncmodels ./NCMODELS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,8): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/NCMODELS' (cds.lib command ignored).
-DEFINE xmutils ./XMUTILS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,9): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMUTILS' (cds.lib command ignored).
-DEFINE xminternal ./XMINTERNAL
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,10): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMINTERNAL' (cds.lib command ignored).
-DEFINE xmmodels ./XMMODELS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,11): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/XMMODELS' (cds.lib command ignored).
-DEFINE cds_assertions ./CDS_ASSERTIONS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,12): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_ASSERTIONS' (cds.lib command ignored).
-DEFINE cds_inhconn ./CDS_INHCONN
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,13): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_INHCONN' (cds.lib command ignored).
-DEFINE cds_spicelib ./CDS_SPICELIB
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_SPICELIB' (cds.lib command ignored).
-DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
-|
-xrun: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
 DEFINE std       ./STD
 |
 xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,1): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/STD' (cds.lib command ignored).
@@ -287,8 +239,8 @@ xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14): 
 DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
 |
 xmvlog: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
-file: /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-	module worklib.normalize_rounder:sv
+file: /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
+	module worklib.add_sub_main:sv
 		errors: 0, warnings: 0
 	Total errors/warnings found outside modules and primitives:
 		errors: 0, warnings: 15
@@ -442,24 +394,18 @@ xmelab: (../rtl/exponent_sub_upd.sv,27): exp_disc
 xmelab: (../rtl/exponent_sub_upd.sv,28): exp_value
 xmelab: (../rtl/exponent_sub_upd.sv,29): out_sign
 
-    exponent_sub_upd #(.EXP_WIDTH(EXP_BITS)) exp_ins  ( 
-                                                   |
-xmelab: *W,CUVWSI (../rtl/add_sub_main.sv,67|51): 2 input ports were not connected:
-xmelab: (../rtl/exponent_sub_upd.sv,26): sign_a
-xmelab: (../rtl/exponent_sub_upd.sv,26): sign_b
-
 	Top level design units:
 		$unit_0x4b4cdddf
 		add_sub_main
         .ma(mantissa_s),
                      |
-xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,76|21): port sizes differ in port connection(1/23) for the instance(add_sub_main) .
+xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,78|21): port sizes differ in port connection(1/23) for the instance(add_sub_main) .
         .exp_magnitude(exp_disc),
                               |
-xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,79|30): port sizes differ in port connection(1/2) for the instance(add_sub_main) .
+xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,81|30): port sizes differ in port connection(1/2) for the instance(add_sub_main) .
         .R(mantissa_result)
                          |
-xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,97|25): port sizes differ in port connection(23/32) for the instance(add_sub_main) .
+xmelab: *W,CUVMPW (../rtl/add_sub_main.sv,99|25): port sizes differ in port connection(23/32) for the instance(add_sub_main) .
 	Building instance overlay tables: .................... Done
 	Generating native compiled code:
 DEFINE std       ./STD
@@ -507,21 +453,21 @@ xmvlog_cg: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,14
 DEFINE cds_amsfunctions ./CDS_AMSFUNCTIONS
 |
 xmvlog_cg: *W,DLCPTH (/edatools/cdnc/XCELIUM2309/tools/inca/files/cdsvhdl.lib,15): cds.lib Invalid path '/edatools/cdnc/XCELIUM2309/tools/inca/files/CDS_AMSFUNCTIONS' (cds.lib command ignored).
-		worklib.normalize_rounder:sv <0x3c3a0554>
-			streams:   4, words:  2294
+		worklib.add_sub_main:sv <0x3642ea40>
+			streams:   2, words:   909
 	Building instance specific data structures.
         .exp_magnitude(exp_disc),
                               |
-xmelab: *W,CSINFI (../rtl/add_sub_main.sv,79|30): implicit wire has no fanin (add_sub_main.exp_disc).
+xmelab: *W,CSINFI (../rtl/add_sub_main.sv,81|30): implicit wire has no fanin (add_sub_main.exp_disc).
         .ma(mantissa_s),
                      |
-xmelab: *W,CSINFI (../rtl/add_sub_main.sv,76|21): implicit wire has no fanin (add_sub_main.mantissa_s).
+xmelab: *W,CSINFI (../rtl/add_sub_main.sv,78|21): implicit wire has no fanin (add_sub_main.mantissa_s).
 	Loading native compiled code:     .................... Done
 	Design hierarchy summary:
 		                 Instances  Unique
 		Modules:                 6       6
 		Registers:              18      18
-		Scalar wires:           47       -
+		Scalar wires:           45       -
 		Expanded wires:         32       1
 		Vectored wires:         19       -
 		Always blocks:          10      10
@@ -579,4 +525,4 @@ xcelium> source /edatools/cdnc/XCELIUM2309/tools/xcelium/files/xmsimrc
 xcelium> run
 xmsim: *W,RNQUIE: Simulation is complete.
 xcelium> exit
-TOOL:	xrun(64)	23.09-s001: Exiting on Feb 05, 2025 at 20:34:04 UTC  (total: 00:00:02)
+TOOL:	xrun(64)	23.09-s001: Exiting on Feb 05, 2025 at 21:43:28 UTC  (total: 00:00:01)
