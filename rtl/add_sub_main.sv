@@ -27,16 +27,7 @@ module add_sub_main #(parameter WIDTH = 32)(
     input [WIDTH-1:0] b,
     input operation_select,
     input clk,
-    output [WIDTH-1:0] result,
-    output sign_a, 
-    output sign_b, 
-    output sign_result,
-    output [MANT_BITS-1:0] mantissa_a, 
-    output [MANT_BITS-1:0] mantissa_b, 
-    output [MANT_BITS-1:0] mantissa_result,
-    output [EXP_BITS-1:0] exp_a, 
-    output [EXP_BITS-1:0] exp_b, 
-    output [EXP_BITS-1:0] exp_result
+    output [WIDTH-1:0] result
 );
 
     // import global_params::*;
@@ -47,6 +38,15 @@ module add_sub_main #(parameter WIDTH = 32)(
     wire [MANT_BITS+3:0] mantissa_a_shifted;
     wire [MANT_BITS+3:0] mantissa_b_shifted; 
     wire [MANT_BITS+3:0] mantissa_result_shifted;
+    wire sign_a;
+    wire sign_b;
+    wire sign_result;
+    wire [MANT_BITS-1:0] mantissa_a;
+    wire [MANT_BITS-1:0] mantissa_b;
+    wire [MANT_BITS-1:0] mantissa_result;
+    wire [EXP_BITS-1:0] exp_a; 
+    wire [EXP_BITS-1:0] exp_b;
+    wire [EXP_BITS-1:0] exp_result;
 
     //Separate sign, exponent and mantissa values for both inputs
     assign mantissa_a = a[22:0];
@@ -60,7 +60,8 @@ module add_sub_main #(parameter WIDTH = 32)(
     sign_logic #(WIDTH) sign_ins ( 
         .x(a),
         .y(b),
-        .operation_select(operation_select)
+        .operation_select(operation_select),
+        .sign_r(sign_result)
     );
 
 
@@ -93,10 +94,11 @@ module add_sub_main #(parameter WIDTH = 32)(
         .carry_out(carry_out)
     );
 
-    normalize_rounder #(.WIDTH(WIDTH)) nr_inst ( 
-        .result_mant(mantissa_result_shifted),      
+    normalize_rounder #(.WIDTH(WIDTH)) normalize_rounder_inst ( 
+        .result_mant(result),      
         .exp_result(exp_result),
-        .R(mantissa_result)
+        .R(mantissa_result),
+        .result_sign(sign_result)
     );
     
 endmodule
