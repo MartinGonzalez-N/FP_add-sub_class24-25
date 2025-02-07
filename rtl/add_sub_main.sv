@@ -19,10 +19,7 @@
 // 											Just testing the git commits
 //
 //////////////////////////////////////////////////////////////////////////////////
-localparam EXP_BITS = 8;
-localparam MANT_BITS = 23;
-
-module add_sub_main #(parameter WIDTH = 32)(
+module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     input [WIDTH-1:0] a,
     input [WIDTH-1:0] b,
     input operation_select,
@@ -30,32 +27,34 @@ module add_sub_main #(parameter WIDTH = 32)(
     output [WIDTH-1:0] result
 );
 
-    // import global_params::*;
+    reg a_greater;
+    reg carry_out;
+    reg [4:0] shift_spaces;
+    reg [MANT_BITS+3:0] mantissa_a_shifted; 
+    reg [MANT_BITS+3:0] mantissa_b_shifted; 
+    reg [MANT_BITS+3:0] mantissa_result_shifted;
+    reg sign_a;
+    reg sign_b;
+    reg sign_result;
+    reg [MANT_BITS-1:0] mantissa_a;
+    reg [MANT_BITS-1:0] mantissa_b;
+    reg [MANT_BITS-1:0] mantissa_result;
+    reg [EXP_BITS-1:0] exp_a; 
+    reg [EXP_BITS-1:0] exp_b;
+    reg [EXP_BITS-1:0] exp_result;
+    reg [1:0] exp_disc;
 
-    wire a_greater;
-    wire carry_out;
-    wire [4:0] shift_spaces;
-    wire [MANT_BITS+3:0] mantissa_a_shifted;
-    wire [MANT_BITS+3:0] mantissa_b_shifted; 
-    wire [MANT_BITS+3:0] mantissa_result_shifted;
-    wire sign_a;
-    wire sign_b;
-    wire sign_result;
-    wire [MANT_BITS-1:0] mantissa_a;
-    wire [MANT_BITS-1:0] mantissa_b;
-    wire [MANT_BITS-1:0] mantissa_result;
-    wire [EXP_BITS-1:0] exp_a; 
-    wire [EXP_BITS-1:0] exp_b;
-    wire [EXP_BITS-1:0] exp_result;
+    always @(a, b) begin
+        mantissa_a = a[22:0];
+        exp_a = a[30:23];
+        sign_a = a[31];
+            
+        mantissa_b = b[22:0];
+        exp_b = b[30:23];
+        sign_b = b[31];
+    end
 
-    //Separate sign, exponent and mantissa values for both inputs
-    assign mantissa_a = a[22:0];
-    assign exp_a = a[30:23];
-    assign sign_a = a[31];
-        
-    assign mantissa_b = b[22:0];
-    assign exp_b = b[30:23];
-    assign sign_b = b[31];
+
 
     sign_logic #(WIDTH) sign_ins ( 
         .x(a),
@@ -70,23 +69,25 @@ module add_sub_main #(parameter WIDTH = 32)(
         .exp_b(exp_b),
         // .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
         // .a_equal(),                             // I made some changes to the module: input[] instead of logic
-       .sign_a(sign_a),
-       .sign_b(sign_b),
+        .exp_disc(exp_disc),
+        .sign_a(sign_a),
+        .sign_b(sign_b),
+        .exp_value(exp_result),
         .shift_spaces(shift_spaces)
     );
 
     mantissa_shifter #(.MANTISSA_WIDTH(MANT_BITS)) mantissa_shifter_ins ( 
-        .ma(mantissa_s),
+        .ma(mantissa_a),
         .mb(mantissa_b),
         .shift_spaces(shift_spaces),
         .exp_magnitude(exp_disc),
-        .mantissa_a(mantissa_a_shifted),
-        .mantissa_b(mantissa_b_shifted)
+        .mantissa_a_out(mantissa_a_shifted),
+        .mantissa_b_out(mantissa_b_shifted)
     );
 
     mantissa_add_sub #(.MANTISSA_WIDTH(MANT_BITS)) mantissa_add_sub_ins ( 
-        .ma(mantissa_a_shifted),
-        .mb(mantissa_b_shifted),
+        .man_a(mantissa_a_shifted),
+        .man_b(mantissa_b_shifted),
         .ma_sign(sign_a),
         .mb_sign(sign_b),
         .operation_select(operation_select),
@@ -95,9 +96,9 @@ module add_sub_main #(parameter WIDTH = 32)(
     );
 
     normalize_rounder #(.WIDTH(WIDTH)) normalize_rounder_inst ( 
-        .result_mant(result),      
+        .result_mant(mantissa_result_shifted),      
         .exp_result(exp_result),
-        .R(mantissa_result),
+        .R(result),
         .result_sign(sign_result)
     );
     

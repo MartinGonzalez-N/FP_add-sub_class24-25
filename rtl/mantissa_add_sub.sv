@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module mantissa_add_sub #(parameter MANTISSA_WIDTH = 23)(
-    input  [MANTISSA_WIDTH+3:0] ma, mb,
+    input  [MANTISSA_WIDTH+3:0] man_a, man_b,
     input ma_sign, mb_sign, operation_select,
     output reg [MANTISSA_WIDTH+3:0] result,
     output reg carry_out
@@ -30,8 +30,8 @@ module mantissa_add_sub #(parameter MANTISSA_WIDTH = 23)(
     wire [MANTISSA_WIDTH+3:0] operand_a, operand_b; 
 
     // Apply sign to the mantissas
-    assign operand_a = ma_sign ? -ma : ma; 
-    assign operand_b = mb_sign ? -mb : mb;
+    assign operand_a = ma_sign ? -man_a : man_a; 
+    assign operand_b = mb_sign ? -man_b : man_b;
 
     always @(*) begin
         if (operation_select) begin  // Addition

@@ -20,10 +20,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module normalize_rounder #(parameter WIDTH = 32) (
-    input [26:0] result_mant,  // 23 bits + 4 extra (por la suma/resta)
-    input [7:0] exp_result,    // Exponente en IEEE 754
+    input [26:0] result_mant,  
+    input [7:0] exp_result,    
     input result_sign,
-    output reg [31:0] R        // Resultado final IEEE 754
+    output reg [31:0] R        
 );
 
     reg [7:0] final_exp;
@@ -33,7 +33,7 @@ module normalize_rounder #(parameter WIDTH = 32) (
     reg [7:0] new_exp;
     reg [26:0] x;
 
-    // Normalización
+    // Normalization
     always @* begin
         if (result_sign) begin
             final_mant = -result_mant;
@@ -42,18 +42,18 @@ module normalize_rounder #(parameter WIDTH = 32) (
         end
 
         if (final_mant[25]) begin 
-            x = final_mant >> 1;  // Desplazar derecha
+            x = final_mant >> 1;  // shift right
             new_exp = exp_result + 1;
         end else if (final_mant[24]) begin
-            x = final_mant;       // Mantener
+            x = final_mant;       // hold
             new_exp = exp_result;
         end else begin
-            x = final_mant << 1;  // Desplazar izquierda
+            x = final_mant << 1;  // shift left
             new_exp = exp_result - 1;
         end
     end
 
-    // Redondeo al más cercano (round to nearest, even)
+    // round to the closest
     always @* begin
         round_up = x[1] & (|x[0:0]);
         if (round_up) begin
@@ -63,7 +63,7 @@ module normalize_rounder #(parameter WIDTH = 32) (
         end
     end
 
-    // Ajuste del exponente en caso de carry en el redondeo
+    // exponent adjust
     always @* begin
         final_exp = new_exp;
         if (rounded_mant == 23'h7FFFFF) begin
@@ -72,7 +72,7 @@ module normalize_rounder #(parameter WIDTH = 32) (
         end
     end
 
-    // Construcción del número IEEE 754
+    //  IEEE 754 final
     always @* begin
         R = {result_sign, final_exp, rounded_mant};
     end

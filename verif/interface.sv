@@ -1,5 +1,5 @@
 
-interface add_sub_main_if #(parameter WIDTH = 32);
+interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     bit  [WIDTH-1:0] a,b;
     bit operation_select;
     bit clk;
