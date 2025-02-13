@@ -23,11 +23,13 @@ module normalize_rounder #(parameter WIDTH = 32) (
     input [26:0] result_mant,  
     input [7:0] exp_result,    
     input result_sign,
+    input carry_out,
     output reg [31:0] R        
 );
 
     reg [7:0] final_exp;
     reg [26:0] final_mant;
+    reg [26:0] compliment_mant;
     reg [22:0] rounded_mant;
     reg round_up;
     reg [7:0] new_exp;
@@ -51,11 +53,20 @@ module normalize_rounder #(parameter WIDTH = 32) (
             x = final_mant << 1;  // shift left
             new_exp = exp_result - 1;
         end
+
+        if(carry_out) begin     //mantissa add sub was positive
+            x = final_mant >> 1
+            new_exp = exp_result + 1;
+        end else if(~carry_out) begin  //mantissa add sub was negative
+            compliment_mant = final_mant;
+            compliment_mant = -1;
+            x = compliment_mant << 1
+        end
     end
 
     // round to the closest
     always @* begin
-        round_up = x[1] & (|x[0:0]);
+        round_up = x[1] & (|x[0]);
         if (round_up) begin
             rounded_mant = x[24:2] + 1;
         end else begin
@@ -68,7 +79,7 @@ module normalize_rounder #(parameter WIDTH = 32) (
         final_exp = new_exp;
         if (rounded_mant == 23'h7FFFFF) begin
             final_exp = new_exp + 1;
-            rounded_mant = 23'h000000;
+            rounded_mant = 27'h000000;
         end
     end
 

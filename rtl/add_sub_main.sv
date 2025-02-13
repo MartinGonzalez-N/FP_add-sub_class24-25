@@ -16,7 +16,7 @@
 // Revision:
 // Revision 0.01 - File Created
 // Additional Comments:
-// 											Just testing the git commits
+// 										
 //
 //////////////////////////////////////////////////////////////////////////////////
 module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
@@ -67,8 +67,6 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     exponent_sub_upd #(.EXP_WIDTH(EXP_BITS)) exp_ins  ( 
         .exp_a(exp_a),
         .exp_b(exp_b),
-        // .a_greater(a_greater),                  // Only 2 bits for the magnitude signal
-        // .a_equal(),                             // I made some changes to the module: input[] instead of logic
         .exp_disc(exp_disc),
         .sign_a(sign_a),
         .sign_b(sign_b),
@@ -98,8 +96,9 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     normalize_rounder #(.WIDTH(WIDTH)) normalize_rounder_inst ( 
         .result_mant(mantissa_result_shifted),      
         .exp_result(exp_result),
-        .R(result),
-        .result_sign(sign_result)
+        .result_sign(sign_result),
+        .carry_out(carry_out),
+        .R(result)
     );
     
 endmodule

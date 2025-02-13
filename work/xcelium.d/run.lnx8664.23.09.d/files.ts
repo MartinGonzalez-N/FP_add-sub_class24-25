@@ -1,9 +1,9 @@
 1738280786 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/global_params.sv
-1738950592 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/normalize_rounder.sv
-1738890740 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
-1738947648 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
+1739316556 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/normalize_rounder.sv
+1739315917 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_add_sub.sv
+1739237623 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/mantissa_shifter.sv
 1738950733 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/exponent_sub_upd.sv
-1738284143 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/sign_logic.sv
-1738952375 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
+1739317138 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/sign_logic.sv
+1739316210 /home/joc/dd_C1_25/FP_add-sub_class24-25/rtl/add_sub_main.sv
 1738949094 /home/joc/dd_C1_25/FP_add-sub_class24-25/verif/interface.sv
 1738952426 /home/joc/dd_C1_25/FP_add-sub_class24-25/verif/tb_top.sv

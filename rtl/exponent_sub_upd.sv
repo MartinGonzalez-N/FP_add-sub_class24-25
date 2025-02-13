@@ -37,8 +37,7 @@ module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represent
 
     always @(*) begin                        // Determins output case
         exp_disc = a_greater ? 2'b10 : 
-        a_less ? 2'b00 :
-        a_equal ? 2'b11 : 2'b01; 
+        a_less ? 2'b00 : 2'b11; 
     end
     
     always @(*) begin

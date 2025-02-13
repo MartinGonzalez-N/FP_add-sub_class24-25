@@ -1,0 +1,85 @@
+*** Message Type: info ***
+When: Tue Feb 11 23:39:18 UTC 2025
+SimVision started.
+Version: TOOL:  simvision(64)   23.09-s001
+User: joc
+Host: joc044
+Platform: Linux/x86_64/4.19.0-20-amd64
+Started: Tue Feb 11 23:39:18 UTC 2025
+Command: /edatools/cdnc/XCELIUM2309/tools.lnx86/simvision/bin/64bit/simvision.exe shm_db
+Work Directory: /home/joc/dd_C1_25/FP_add-sub_class24-25/work
+ 
+*** Message Type: info ***
+When: Tue Feb 11 23:39:19 UTC 2025
+Create waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: Tue Feb 11 23:39:28 UTC 2025
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: Tue Feb 11 23:39:29 UTC 2025
+Create utility window: "Properties"
+ 
+*** Message Type: error ***
+When: Tue Feb 11 23:41:33 UTC 2025
+can't find node "8" in ::tree1
+    (object "::replicator::parts31" method "::replicator::Parts::run" )
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "replicator::capture" line 1)
+    invoked from within
+"replicator::capture $this  -as SV_WAVEFORM -items $_dragsel  -progresscommand [_getProgressCommand configure "Capturing signals..."]"
+    (object "::.waveWindow0.work.user.waveset" method "::WaveSet::_drag" body line 32)
+    invoked from within
+"::.waveWindow0.work.user.waveset _drag SV_WAVEFORM"
+    (in namespace inscope "::WaveSet" script line 1)
+    invoked from within
+"namespace inscope ::WaveSet {::.waveWindow0.work.user.waveset _drag SV_WAVEFORM}"
+    invoked from within
+"list  {SV_WAVEFORM} [namespace inscope ::WaveSet {::.waveWindow0.work.user.waveset _drag SV_WAVEFORM}] {SV_SIGNAL} [namespace inscope ::WaveSet {::.wa..."
+    invoked from within
+"list {copy} [list  {SV_WAVEFORM} [namespace inscope ::WaveSet {::.waveWindow0.work.user.waveset _drag SV_WAVEFORM}] {SV_SIGNAL} [namespace inscope ::W..."
+    ("uplevel" body line 1)
+    invoked from within
+"uplevel \#0 $cmd"
+    (procedure "tkdnd::_init_drag" line 10)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .waveWindow0.work.user.waveset.signallist -actions copy -id {22260 ::.waveWindow0.work.user.waveset}"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag .waveWindow0.work.user.waveset.signallist -actions copy -id {22260 ::.waveWindow0.work.user.waveset}"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "::svdnd" line 1)
+    invoked from within
+"::svdnd drag $win -actions {copy} -id [list [pid] $this]"
+    (object "::.waveWindow0.work.user.waveset" method "::WaveSet::_delayedStartDND" body line 35)
+    invoked from within
+"::.waveWindow0.work.user.waveset _delayedStartDND .waveWindow0.work.user.waveset.signallist 8 91 152 1"
+    (in namespace inscope "::WaveSet" script line 1)
+    invoked from within
+"namespace inscope ::WaveSet {::.waveWindow0.work.user.waveset _delayedStartDND .waveWindow0.work.user.waveset.signallist 8 91 152 1}"
+    ("after" script)
+ 
+*** Message Type: info ***
+When: Tue Feb 11 23:41:53 UTC 2025
+SimVision Exit.
+ 
