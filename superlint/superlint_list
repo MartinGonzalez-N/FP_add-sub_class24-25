@@ -1,0 +1,9 @@
+../rtl/sum1b.sv
+../rtl/mul1b.sv
+../rtl/step.sv
+../rtl/mul_cascode.sv
+../rtl/sign_logic.sv
+../rtl/exponent_logic.sv
+../rtl/normalizer.sv
+../rtl/rounding.sv
+../rtl/mul_div.sv
