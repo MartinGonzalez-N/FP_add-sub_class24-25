@@ -42,13 +42,27 @@ module tb_top;
         .operation_select(add_sub_main_if_inst.operation_select),
         .result(add_sub_main_if_inst.result)
     );
-    
-    `define TEST1
+
+    bind add_sub_main add_sub_asserts add_sub_asserts_inst(add_sub_main_if_inst, add_sub_main_inst);
+
+
+    `define TC_Add_AB_random_p
+    //`define TC_Add_AB_random_n
 
     //initial alu_if_inst.clk = 0;
     //always #25ps alu_if_inst.clk = ~alu_if_inst.clk;
 
-    `ifdef TEST1
+    `ifdef TC_Add_AB_random_p
+        initial begin
+            repeat (CICLES) begin 
+                assert (~add_sub_main_if_inst.a[31] && ~add_sub_main_if_inst.b[31] == ~add_sub_main_if_inst.result[31]);
+                add_sub_main_if_inst.task_generate_random_stimul();
+                #5;
+            end
+        end
+   `endif
+
+   `ifdef TC_Add_AB_random_n
         initial begin
             repeat (CICLES) begin 
                 add_sub_main_if_inst.task_generate_random_stimul();
@@ -56,5 +70,6 @@ module tb_top;
             end
         end
    `endif
+
 
 endmodule
