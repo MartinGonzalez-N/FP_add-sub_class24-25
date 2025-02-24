@@ -24,8 +24,6 @@ module tb_top;
     // Parámetros
     parameter CICLES = 1800;
     parameter WIDTH = 32;
-    parameter EXP_BITS = 8;
-    parameter MANT_BITS = 23;
 
     initial begin
         $shm_open("shm_db");
@@ -33,25 +31,39 @@ module tb_top;
     end
 
     // Instanciar la interface
-    add_sub_main_if #(.WIDTH(WIDTH), .EXP_BITS(EXP_BITS), .MANT_BITS(MANT_BITS)) add_sub_main_if_inst();
+    add_sub_main_if #(.WIDTH(WIDTH)) add_sub_main_if_inst();
 
     // Instancia del DUT
-    add_sub_main #(.WIDTH(WIDTH), .EXP_BITS(EXP_BITS), .MANT_BITS(MANT_BITS)) add_sub_main_inst(
+    add_sub_main #(.WIDTH(WIDTH)) add_sub_main_inst(
         .a(add_sub_main_if_inst.a),
         .b(add_sub_main_if_inst.b),
         .operation_select(add_sub_main_if_inst.operation_select),
         .result(add_sub_main_if_inst.result)
     );
 
-    bind add_sub_main add_sub_asserts add_sub_asserts_inst(add_sub_main_if_inst, add_sub_main_inst);
+    //bind add_sub_main add_sub_asserts add_sub_asserts_inst(add_sub_main_if_inst, add_sub_main_inst);
 
-
-    `define TC_Add_AB_random_p
-    //`define TC_Add_AB_random_n
-
+    //`define TC_Add_AB_random_p
+    `define TC_ADD_SUB_CHECK
     //initial alu_if_inst.clk = 0;
     //always #25ps alu_if_inst.clk = ~alu_if_inst.clk;
 
+   `ifdef TC_ADD_SUB_CHECK
+        initial begin
+            shortreal expected_result;
+            repeat (10) begin 
+                a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
+                add_sub_main_if_inst.operation_select = 1;
+                add_sub_main_if_inst.task_generate_random_stimul();
+                expected_result = $bitstoshortreal(add_sub_main_if_inst.a) + $bitstoshortreal(add_sub_main_if_inst.b);
+                #10;
+                add_sub_main_if_inst.operation_select = 0;
+                expected_result = $bitstoshortreal(add_sub_main_if_inst.a) - $bitstoshortreal(add_sub_main_if_inst.b);
+                #10;
+            end
+        end
+    `endif
+    
     `ifdef TC_Add_AB_random_p
         initial begin
             repeat (CICLES) begin 
