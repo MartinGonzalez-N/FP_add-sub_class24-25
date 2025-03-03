@@ -31,18 +31,20 @@ module normalize_rounder #(parameter WIDTH = 32) (
 
     reg [7:0] final_exp = 0;
     reg [26:0] final_mant = 0;
-    reg [26:0] compliment_mant = 0;
+    reg [26:0] compliment_one_mant = 0;
+    reg [26:0] compliment_two_mant = 0;
     reg [22:0] rounded_mant = 0;
     reg round_up = 0;
     reg [7:0] new_exp = 0;
     reg [7:0] exp_after_round = 0;
     reg [26:0] x = 0;
+    reg [26:0] x_shifted = 0;
     reg [26:0] mant_shifted = 0;
     reg final_sign = 0;
 
     // Normalization
     // always @(posedge clk) begin
-    always @(result_mant) begin
+    always @(*) begin
         if (result_sign) begin
             final_mant = -result_mant;
         end else begin
@@ -61,12 +63,14 @@ module normalize_rounder #(parameter WIDTH = 32) (
         end */
         
         if(carry_out) begin     //mantissa add sub was positive
-            x = final_mant >> 1;
+            // x = final_mant >> 1;
+            x = {carry_out, final_mant[26:1]};
+            x_shifted = x << 1;
             new_exp = exp_result + 1;
         end else if(~carry_out) begin  //mantissa add sub was negative
-            compliment_mant = final_mant;
-            compliment_mant = -1;
-            x = compliment_mant << 1;
+            compliment_one_mant = ~final_mant;
+            compliment_two_mant = compliment_one_mant + 1;
+            x = compliment_two_mant << 1;
             new_exp = exp_result-1;
             final_sign = 1;
         end
@@ -75,7 +79,7 @@ module normalize_rounder #(parameter WIDTH = 32) (
 
     // round to the closest
     // always @(posedge clk) begin
-    always @(result_mant) begin
+    always @(*) begin
         /* round_up = x[1] & (|x[0]);
         if (round_up) begin
             rounded_mant = x[24:2] + 1;
@@ -85,26 +89,30 @@ module normalize_rounder #(parameter WIDTH = 32) (
 
         if((x[0] | x[1] | x[3]) & x[2]) begin
             mant_shifted = x + 1;
-            rounded_mant = mant_shifted >> 1;
+            // rounded_mant = mant_shifted >> 1;
+            rounded_mant = x[24:2];
             exp_after_round = new_exp + 1;
         end else begin
-            rounded_mant = x;
+            rounded_mant = x_shifted[26:4];
             exp_after_round = new_exp;
         end
     end
 
     // exponent adjust
-    /* always @(result_mant) begin
+    always @(*) begin
         final_exp = new_exp;
         if (rounded_mant == 23'h7FFFFF) begin
             final_exp = new_exp + 1;
-            rounded_mant = 27'h000000;
-        end
-    end */
+            rounded_mant = 23'h000000;
+        end /*else begin
+            final_exp = new_exp;
+            // rounded_mant = rounded_mant;
+        end */
+    end
 
     //  IEEE 754 final
     // always @(posedge clk) begin
-    always @(result_mant) begin
+    always @(*) begin
         R = {final_sign, final_exp, rounded_mant};
     end
 

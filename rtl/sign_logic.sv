@@ -1,28 +1,22 @@
 module sign_logic #(parameter WIDTH = 32)(
-    input wire [WIDTH-1:0] x,y,
+    input bit sign_a, sign_b,
+    input [22:0] mantissa_a, mantissa_b,
+    input [7:0] exp_a, exp_b,
     input operation_select,
     //input bit clk,
     output reg result,
     output sign_r
     );
     
-    wire [22:0] mantissa_a, mantissa_b, mantissa_result;
-    wire sign_b;
     wire def1_1;
-    wire [7:0] exp_a, exp_b;
     wire sign_x, sign_y;
     
-    assign sign_x = x[31];
-    assign sign_y = y[31];
-    
-    assign mantissa_a = x[22:0];
-    assign exp_a = x[30:23];
+    assign sign_x = sign_a;
+    assign sign_y = sign_b;
 
-    assign mantissa_b = y[22:0];
-    assign exp_b = y[30:23];
-    assign sign_b = operation_select ? sign_y : ~sign_y;
+    assign sign = operation_select ? sign_y : ~sign_y;
     
-    assign def1_1 = (mantissa_a > mantissa_b) ? sign_x : (mantissa_a < mantissa_b) ? sign_b : (sign_x ~^ sign_b);
-    assign sign_r = (exp_a > exp_b) ? sign_x : (exp_a < exp_b) ? sign_b : def1_1;
+    assign def1_1 = (mantissa_a > mantissa_b) ? sign_x : (mantissa_a < mantissa_b) ? sign : (sign_x ~^ sign);
+    assign sign_r = (exp_a > exp_b) ? sign_x : (exp_a < exp_b) ? sign : def1_1;
 
 endmodule

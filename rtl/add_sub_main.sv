@@ -28,37 +28,45 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     output [WIDTH-1:0] result
 );
 
-    reg a_greater;
-    reg carry_out;
-    reg [4:0] shift_spaces;
-    reg [MANT_BITS+3:0] mantissa_a_shifted; 
-    reg [MANT_BITS+3:0] mantissa_b_shifted; 
-    reg [MANT_BITS+3:0] mantissa_result_shifted;
-    reg sign_a;
-    reg sign_b;
-    reg sign_result;
-    reg [MANT_BITS-1:0] mantissa_a;
-    reg [MANT_BITS-1:0] mantissa_b;
-    reg [MANT_BITS-1:0] mantissa_result;
-    reg [EXP_BITS-1:0] exp_a; 
-    reg [EXP_BITS-1:0] exp_b;
-    reg [EXP_BITS-1:0] exp_result;
-    reg [1:0] exp_disc;
+    //reg a_greater;
+    wire carry_out;
+    wire [4:0] shift_spaces;
+    wire [MANT_BITS+3:0] mantissa_a_shifted; 
+    wire [MANT_BITS+3:0] mantissa_b_shifted; 
+    wire [MANT_BITS+3:0] mantissa_result_shifted;
+    wire [MANT_BITS-1:0] mantissa_result;
+    wire [EXP_BITS-1:0] exp_result;
+    wire [1:0] exp_disc;
+    wire sign_result;
 
-    always @(a, b) begin
-        mantissa_a = a[22:0];
-        exp_a = a[30:23];
-        sign_a = a[31];
-            
-        mantissa_b = b[22:0];
-        exp_b = b[30:23];
-        sign_b = b[31];
-    end
+    wire sign_a;
+    assign sign_a = a[31];          // asignación bit de signo a
+
+    wire sign_b;
+    assign sign_b = b[31];          // asignación bit de signo b
+
+    wire [MANT_BITS-1:0] mantissa_a;
+    assign mantissa_a = a[22:0];    // asignación de mantisa a
+
+    wire [MANT_BITS-1:0] mantissa_b;
+    assign mantissa_b = b[22:0];    // asignación de mantisa b
+
+    wire [EXP_BITS-1:0] exp_a; 
+    assign exp_a = a[30:23];        // asignación de exponente a
+
+    wire [EXP_BITS-1:0] exp_b;
+    assign exp_b = b[30:23];        // asignación de exponente b
+
+
 
 
     sign_logic #(WIDTH) sign_ins ( 
-        .x(a),
-        .y(b),
+        .sign_a(sign_a),
+        .sign_b(sign_b),
+        .mantissa_a(mantissa_a),
+        .mantissa_b(mantissa_b),
+        .exp_a(exp_a),
+        .exp_b(exp_b),
         .operation_select(operation_select),
         .sign_r(sign_result)
     );
