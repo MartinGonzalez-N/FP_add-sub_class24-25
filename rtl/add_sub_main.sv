@@ -24,6 +24,7 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     input [WIDTH-1:0] b,
     input operation_select,
     input clk,
+    input reset,
     output [WIDTH-1:0] result
 );
 
@@ -55,13 +56,15 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     end
 
 
-
     sign_logic #(WIDTH) sign_ins ( 
         .x(a),
         .y(b),
         .operation_select(operation_select),
         .sign_r(sign_result)
     );
+
+
+    // TODO add exception_block instance here
 
 
     exponent_sub_upd #(.EXP_WIDTH(EXP_BITS)) exp_ins  ( 
@@ -98,7 +101,9 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
         .exp_result(exp_result),
         .result_sign(sign_result),
         .carry_out(carry_out),
-        .R(result)
+        .R(result),
+        .clk(clk),
+        .reset(reset)
     );
     
 endmodule

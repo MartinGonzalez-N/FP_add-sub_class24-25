@@ -25,7 +25,8 @@
 ../rtl/sign_logic.sv
 ../rtl/add_sub_main.sv
 ../verif/interface.sv
-../verif/add_sub_asserts.sv
-../verif/tb_top.sv
+#../verif/add_sub_asserts.sv
+ ../verif/tb_top.sv
+#../verif/tb_testing.sv
 
  

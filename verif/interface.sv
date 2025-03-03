@@ -100,12 +100,13 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     endfunction
 
     //Function to set the input "A" to minimum positive value
+    /*
     function set_input_a_min_pos();
         a[31] = 0;
         a[30:23] = 1';
         a[22:0] = '0';
     endfunction
-
+*/
     //Function to set the input "A" to maximum negative value
     function set_input_a_max_neg();
         a[31] = 1;
@@ -221,7 +222,7 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
         b[30:23] = '0;
         b[22:0] = 1;
     endfunction
-
+/*
     // Function to randomize input B with values > MIDDLE_VALUE and randomize input A with values > B
     function randomize_inputs_a_and_b_overflow();
         std::randomize(a, b) with {b > MID_VAl; a > b;};
@@ -231,7 +232,7 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     function randomize_inputs_b_and_a_overflow();
         std::randomize(a, b) with {a > MID_VAl; b > a;};
     endfunction
-
+*/
     //Function used to randomize both inputs (A,B) where A is greater than B.
     function randomize_inputs_a_greater_than_b();
         std::randomize(a, b) with {a > b;};

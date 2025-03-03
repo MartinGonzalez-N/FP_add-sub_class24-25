@@ -22,9 +22,11 @@
 
 module exception_block #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)
 (
-    input [WIDTH-1:0] a,
-    input [WIDTH-1:0] b,
+    input [WIDTH-1:0] in_a,
+    input [WIDTH-1:0] in_b,
     input operation_select,
+    output [WIDTH-1:0] out_a,
+    output [WIDTH-1:0] out_b,
     output reg a_is_denormal,
     output reg b_is_denormal,
     output reg invalid_operation,
