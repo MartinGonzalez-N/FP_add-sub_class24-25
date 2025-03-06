@@ -6,6 +6,7 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     logic sign_a, sign_b, sign_result;
     logic [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result;
     logic [EXP_BITS-1:0] exp_a, exp_b, exp_result;
+    parameter MID_VAl = 32'h3f800000;
     
     task automatic generate_custom_fp(output bit [31:0] fp_num);
         bit [7:0] exponent;
@@ -42,14 +43,14 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     
     
     ///BFM///
-
+    
     // Function to set the value of the input "A" to zero
-    function set_input_A_to_zero();
+    function set_input_a_to_zero();
         a = 0;
     endfunction
     
     // Function to set the value of the input "B" to zero
-    function set_input_B_to_zero();
+    function set_input_b_to_zero();
         b = 0;
     endfunction    
 
@@ -61,35 +62,65 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
 
     //Function to set the value of operation_select to a random value
     function set_operation_select_rdm();
-        std::randomize(operation_select);
+        void'(std::randomize(operation_select));
     endfunction
 
     //Function to set the value of the input "A" to a random value
     function set_input_a_rdm();
-        std::randomize(a);
+        void'(std::randomize(a));
     endfunction
 
     //Function to set the value of the input "B" to a random value
     function set_input_b_rdm();
-        std::randomize(b);
+        void'(std::randomize(b));
     endfunction
 
     // Function to set the value of the input "A" to a random value and "B" to zero
     function set_input_a_rdm_and_b_zero();
-        std::randomize(a);
+        void'(std::randomize(a));
         b = 0;
     endfunction
 
     // Function to set the value of the input "A" to zero and "B" to a random value
     function set_input_b_rdm_and_a_zero();
         a = 0;
-        std::randomize(b);
+        void'(std::randomize(b));
     endfunction
 
     // Function to set the value of the input "A" and "B" to a random value
     function set_input_a_and_b_rdm();
-        std::randomize(a);
-        std::randomize(b);
+        void'(std::randomize(a));
+        void'(std::randomize(b));
+    endfunction
+
+    // Function to setthe value of the input "A" to Nan
+    function set_input_a_to_nan();
+        a = 32'h7fc00000;
+    endfunction
+
+    // Function to set the value of the input "B" to Nan
+    function set_input_b_to_nan();
+        b = 32'h7fc00000;
+    endfunction
+
+    // Function to set the value of the input "A" to positive inf
+    function set_input_a_to_inf();
+        a = 32'h7f800000;
+    endfunction
+
+    // Function to set the value of the input "B" to positive inf
+    function set_input_b_to_inf();
+        b = 32'h7f800000;
+    endfunction
+
+    // Function to set the value of the input "A" to negative inf
+    function set_input_a_to_neg_inf();
+        a = 32'hff800000;
+    endfunction
+
+    // Function to set the value of the input "B" to negative inf
+    function set_input_b_to_neg_inf();
+        b = 32'hff800000;
     endfunction
 
     //Function to set the input "A" to maximum positive value
@@ -103,8 +134,8 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     /*
     function set_input_a_min_pos();
         a[31] = 0;
-        a[30:23] = 1';
-        a[22:0] = '0';
+        a[30:23] = '1;
+        a[22:0] = '0;
     endfunction
 */
     //Function to set the input "A" to maximum negative value
@@ -225,22 +256,22 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
 /*
     // Function to randomize input B with values > MIDDLE_VALUE and randomize input A with values > B
     function randomize_inputs_a_and_b_overflow();
-        std::randomize(a, b) with {b > MID_VAl; a > b;};
+        void'(std::randomize(a, b) with {b > MID_VAl; a > b;});
     endfunction
 
     // Function to randomize input A with values > MIDDLE_VALUE and randomize input B with values > B
     function randomize_inputs_b_and_a_overflow();
-        std::randomize(a, b) with {a > MID_VAl; b > a;};
+        void'(std::randomize(a, b) with {a > MID_VAl; b > a;});
     endfunction
 */
     //Function used to randomize both inputs (A,B) where A is greater than B.
     function randomize_inputs_a_greater_than_b();
-        std::randomize(a, b) with {a > b;};
+        void'(std::randomize(a, b) with {a > b;});
     endfunction
 
     //Function used to randomize both inputs (A,B) where A is less than B.
     function randomize_inputs_a_less_than_b();
-        std::randomize(a, b) with {a < b;};
+        void'(std::randomize(a, b) with {a < b;});
     endfunction
 
     //Function used to set the value of input A to a specific value.
@@ -252,7 +283,5 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     function set_input_b_to_specific_value(bit [WIDTH-1:0] value);
         b = value;
     endfunction
-
-
 
 endinterface 
