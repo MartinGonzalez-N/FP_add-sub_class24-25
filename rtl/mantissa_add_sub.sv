@@ -19,26 +19,25 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module mantissa_add_sub #(parameter MANTISSA_WIDTH = 23)(
-    input  [MANTISSA_WIDTH+3:0] man_a, man_b,
-    input ma_sign, mb_sign, operation_select,
+module mantissa_add_sub #(parameter MANTISSA_WIDTH = 0)(
+    input reg [MANTISSA_WIDTH+3:0] man_a, man_b,
+    input reg ma_sign, mb_sign, operation_select,
     output reg [MANTISSA_WIDTH+3:0] result,
     output reg carry_out
-    );
+);
+    
     
     // Internal signals
+  wire [MANTISSA_WIDTH+3:0] sum;
+  wire [MANTISSA_WIDTH+3:0] sub;
+    wire op;
     wire [MANTISSA_WIDTH+3:0] operand_a, operand_b; 
 
     // Apply sign to the mantissas
-    assign operand_a = ma_sign ? -man_a : man_a; 
-    assign operand_b = mb_sign ? -man_b : man_b;
+  assign op = (operation_select ^ (ma_sign ^ mb_sign));
 
-    always @(*) begin
-        if (operation_select) begin  // Addition
-            {carry_out, result} = operand_a + operand_b; 
-        end else begin               // Subtraction
-            {carry_out, result} = operand_a - operand_b; 
-        end
-    end
+    assign {carry_out, sum} = man_a + man_b;
+  	assign sub = man_a + ~man_b + 1;
+  assign result = op ? sum : (man_b > man_a) ? ~(sub-1) : sub;
     
 endmodule

@@ -82,7 +82,8 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
         .sign_a(sign_a),
         .sign_b(sign_b),
         .exp_value(exp_result),
-        .shift_spaces(shift_spaces)
+        .shift_spaces(shift_spaces),
+        .operation_select(operation_select)
     );
 
     mantissa_shifter #(.MANTISSA_WIDTH(MANT_BITS)) mantissa_shifter_ins ( 
@@ -105,7 +106,8 @@ module add_sub_main #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23)(
     );
 
     normalize_rounder #(.WIDTH(WIDTH)) normalize_rounder_inst ( 
-        .result_mant(mantissa_result_shifted),      
+        .result_mant(mantissa_result_shifted),
+        .op(operation_select),
         .exp_result(exp_result),
         .result_sign(sign_result),
         .carry_out(carry_out),

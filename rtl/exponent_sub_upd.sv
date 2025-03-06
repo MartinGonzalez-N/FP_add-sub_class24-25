@@ -26,14 +26,18 @@ module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represent
     input sign_a, sign_b,
     output reg [1:0] exp_disc,
     output reg [EXP_WIDTH-1:0] exp_value,
-    output reg out_sign    
+    output reg out_sign,  
+    input operation_select  
 );    
 
     wire a_greater, a_less, a_equal;
+    wire update_sign_b;
 
     assign a_greater = (exp_a > exp_b);        // Compare
     assign a_less = (exp_a < exp_b);           // Imput 
     assign a_equal = (exp_a == exp_b);         // Exponents
+
+    assign update_sign_b = sign_b ~^ operation_select;
 
     always @(*) begin                        // Determins output case
         exp_disc = a_greater ? 2'b10 : 
@@ -45,7 +49,9 @@ module  exponent_sub_upd #(parameter EXP_WIDTH = 8)(    // Module that represent
     end   
     
     always @(*) begin
-        out_sign = a_greater ? sign_a : sign_b;                // Outputs sign
+	
+        out_sign = a_greater ? sign_a : update_sign_b;                // Outputs sign
+
     end      
 
     always @(*) begin

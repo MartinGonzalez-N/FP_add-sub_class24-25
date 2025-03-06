@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module normalize_rounder #(parameter WIDTH = 32) (
-    input [26:0] result_mant,  
+    input [26:0] result_mant, 
+    input op, 
     input [7:0] exp_result,    
     input result_sign,
     input carry_out,
@@ -30,90 +31,64 @@ module normalize_rounder #(parameter WIDTH = 32) (
 );
 
     reg [7:0] final_exp = 0;
-    reg [26:0] final_mant = 0;
-    reg [26:0] compliment_one_mant = 0;
-    reg [26:0] compliment_two_mant = 0;
-    reg [22:0] rounded_mant = 0;
-    reg round_up = 0;
-    reg [7:0] new_exp = 0;
-    reg [7:0] exp_after_round = 0;
-    reg [26:0] x = 0;
-    reg [26:0] x_shifted = 0;
-    reg [26:0] mant_shifted = 0;
-    reg final_sign = 0;
+    reg [22:0] final_mant = 0;
 
+    reg [4:0]shift = 0;
+    wire [22:0] mant;
+    wire [2:0] GRS;
+    wire first_bit;
+    wire [26:0] rounded_mant;
+
+    assign rounded_mant = (carry_out & op) ? ({1'b1,result_mant} >> 1) : result_mant;
+    assign {first_bit,mant,GRS} = rounded_mant;
     // Normalization
+
     // always @(posedge clk) begin
+    bit lz_error;
     always @(*) begin
-        if (result_sign) begin
-            final_mant = -result_mant;
-        end else begin
-            final_mant = result_mant;
+        lz_error = 0;
+        if (first_bit == 0) begin
+            casex (mant)
+                    {1'b0,1'b1,22'bx}: shift=1;
+                    {1'b0,1'b1,21'bx}: shift=2;
+                    {2'b0,1'b1,20'bx}: shift=3;
+                    {3'b0,'1,19'bx}: shift=4;
+                    {4'b0,'1,18'bx}: shift=5;
+                    {5'b0,'1,17'bx}: shift=6;
+                    {6'b0,'1,16'bx}: shift=7;
+                    {7'b0,'1,15'bx}: shift=8;
+                    {8'b0,'1,14'bx}: shift=9;
+                    {9'b0,'1,13'bx}: shift=10;
+                    {10'b0,'1,12'bx}: shift=11;
+                    {11'b0,'1,11'bx}: shift=12;
+                    {12'b0,'1,10'bx}: shift=13;
+                    {13'b0,'1,9'bx}: shift=14;
+                    {14'b0,'1,8'bx}: shift=15;
+                    {15'b0,'1,7'bx}: shift=16;
+                    {16'b0,'1,6'bx}: shift=17;
+                    {17'b0,'1,5'bx}: shift=18;
+                    {18'b0,'1,4'bx}: shift=19;
+                    {19'b0,'1,3'bx}: shift=20;
+                    {20'b0,'1,2'bx}: shift=21;
+                    {21'b0,'1,1'bx}: shift=22;
+                    {22'b0,'1,0'bx}: shift=23;
+                default: begin
+                    shift=0;
+                    lz_error = 1;
+                end
+            endcase
+        end
+        else begin
+            shift = 0;
         end
 
-       /*  if (final_mant[25]) begin  
-            x = final_mant >> 1;  // shift right
-            new_exp = exp_result + 1;
-        end else if (final_mant[24]) begin
-            x = final_mant;       // hold
-            new_exp = exp_result;
-        end else begin
-            x = final_mant << 1;  // shift left
-            new_exp = exp_result - 1;
-        end */
+        final_mant = mant << shift;
+        if (op == 1'b1)
+                final_exp = exp_result + carry_out;
+            else
+                final_exp = exp_result - shift;
         
-        if(carry_out) begin     //mantissa add sub was positive
-            // x = final_mant >> 1;
-            x = {carry_out, final_mant[26:1]};
-            x_shifted = x << 1;
-            new_exp = exp_result + 1;
-        end else if(~carry_out) begin  //mantissa add sub was negative
-            compliment_one_mant = ~final_mant;
-            compliment_two_mant = compliment_one_mant + 1;
-            x = compliment_two_mant << 1;
-            new_exp = exp_result-1;
-            final_sign = 1;
-        end
-        
-    end
-
-    // round to the closest
-    // always @(posedge clk) begin
-    always @(*) begin
-        /* round_up = x[1] & (|x[0]);
-        if (round_up) begin
-            rounded_mant = x[24:2] + 1;
-        end else begin
-            rounded_mant = x[24:2];
-        end */
-
-        if((x[0] | x[1] | x[3]) & x[2]) begin
-            mant_shifted = x + 1;
-            // rounded_mant = mant_shifted >> 1;
-            rounded_mant = x[24:2];
-            exp_after_round = new_exp + 1;
-        end else begin
-            rounded_mant = x_shifted[26:4];
-            exp_after_round = new_exp;
-        end
-    end
-
-    // exponent adjust
-    always @(*) begin
-        final_exp = new_exp;
-        if (rounded_mant == 23'h7FFFFF) begin
-            final_exp = new_exp + 1;
-            rounded_mant = 23'h000000;
-        end /*else begin
-            final_exp = new_exp;
-            // rounded_mant = rounded_mant;
-        end */
-    end
-
-    //  IEEE 754 final
-    // always @(posedge clk) begin
-    always @(*) begin
-        R = {final_sign, final_exp, rounded_mant};
+        R = {result_sign, final_exp, final_mant};
     end
 
 endmodule
