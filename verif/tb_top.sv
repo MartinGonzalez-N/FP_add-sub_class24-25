@@ -19,14 +19,13 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+    
+
 module tb_top;
 
-    // Parámetros
-    parameter CICLES = 1800;
+    parameter CICLES = 1000;
     parameter WIDTH = 32;
-    integer bins_nums = 127;
     bit clk;
-
     always #5 clk = !clk;
 
     initial begin
@@ -54,13 +53,6 @@ module tb_top;
         //.clk(clk)
     );
 
-    covergroup cg_a; 
-
-        cp_man : coverpoint add_sub_main_if_inst.a[31:0] { 
-            bins range[] = {[0:$]}; 
-        }
-        
-    endgroup
 
     //`define TC_Add_AB_random_p
     //`define TC_ADD_SUB_CHECK
@@ -69,11 +61,13 @@ module tb_top;
 
     //1
     `ifdef ADD_POS_AB
+        `CREATE_COVERGROUPS(add_sub_main_if_inst.a, add_sub_main_if_inst.b)
         initial begin
             cg_a cg_a_inst = new();
-
-            repeat(100)@(posedge clk) begin
+            cg_b cg_b_inst = new();
+            repeat(CICLES)@(posedge clk) begin
                 cg_a_inst.sample();
+                cg_b_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_rdm();
                 add_sub_main_if_inst.a = add_sub_main_if_inst.a & 32'h7fffffff;
@@ -89,7 +83,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (100)@(posedge clk) begin
+            repeat (CICLES)@(posedge clk) begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_rdm();
@@ -106,7 +100,7 @@ module tb_top;
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
             //    cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_to_specific_value(32'h7f800000);
@@ -121,7 +115,7 @@ module tb_top;
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_b_to_specific_value(32'h7f800000);
@@ -136,7 +130,7 @@ module tb_top;
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
             //    cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_to_zero();
@@ -151,7 +145,7 @@ module tb_top;
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_to_zero();
@@ -165,7 +159,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_b_to_zero();
@@ -179,7 +173,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_max_pos();
@@ -193,7 +187,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_b_max_pos();
@@ -207,7 +201,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_max_pos();
@@ -222,7 +216,7 @@ module tb_top;
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
             //    cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_b_to_nan();
@@ -236,7 +230,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_a_to_nan();
@@ -251,7 +245,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 1;
                 add_sub_main_if_inst.set_input_b_to_nan();
@@ -265,7 +259,7 @@ module tb_top;
         //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
           //  cg_a_exp cg_a_exp_inst = new();
-            repeat (100)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
                 add_sub_main_if_inst.operation_select = 0;
@@ -283,7 +277,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (100)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
                 add_sub_main_if_inst.operation_select = 0;
@@ -301,7 +295,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_a_to_zero();
@@ -316,7 +310,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_a_to_zero();
@@ -331,7 +325,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_b_to_zero();
@@ -346,7 +340,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_a_max_neg();
@@ -361,7 +355,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_b_max_neg();
@@ -376,7 +370,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_b_to_nan();
@@ -391,7 +385,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_a_to_nan();
@@ -406,7 +400,7 @@ module tb_top;
         initial begin
             //cg_a_exp cg_a_exp_inst = new();
 
-            repeat (10)@(posedge clk)begin
+            repeat (CICLES)@(posedge clk)begin
                 //cg_a_exp_inst.sample();
                 add_sub_main_if_inst.operation_select = 0;
                 add_sub_main_if_inst.set_input_b_to_nan();
