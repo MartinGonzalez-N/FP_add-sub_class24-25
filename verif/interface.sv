@@ -6,8 +6,18 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     logic sign_a, sign_b, sign_result;
     logic [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result;
     logic [EXP_BITS-1:0] exp_a, exp_b, exp_result;
+
     parameter MID_VAl = 32'h3f800000;
-    
+    parameter INF = 32'h7f800000;
+    parameter NEG_INF = 32'hff800000;
+    parameter NAN = 32'h7fc00000;
+    parameter MAX_POS = 32'h7f7fffff;
+    parameter MIN_POS = 32'h00800000; //Normalized
+    parameter MIN_POS_DENORM = 32'h00000001; //Denormalized
+    parameter MAX_NEG = 32'hff7fffff;
+    parameter MIN_NEG = 32'h80800000; //Normalized
+    parameter MIN_NEG_DENORM = 32'h80000001; //Denormalized
+
     task automatic generate_custom_fp(output bit [31:0] fp_num);
         bit [7:0] exponent;
         bit [22:0] mantissa;
@@ -44,242 +54,161 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     
     ///BFM///
     
-    // Function to set the value of the input "A" to zero
+    //1 Function to set the value of the input "A" to zero
     function set_input_a_to_zero();
         a = 0;
     endfunction
     
-    // Function to set the value of the input "B" to zero
+    //2 Function to set the value of the input "B" to zero
     function set_input_b_to_zero();
         b = 0;
     endfunction    
 
-    // Function to set the value of the input "A" and "B" to zero
+    //3 Function to set the value of the input "A" and "B" to zero
     function set_input_a_and_b_zero();
         a = 0;
         b = 0;
     endfunction
 
-    //Function to set the value of operation_select to a random value
+    //4 Function to set the value of operation_select to a random value
     function set_operation_select_rdm();
         void'(std::randomize(operation_select));
     endfunction
 
-    //Function to set the value of the input "A" to a random value
+    //5 Function to set the value of the input "A" to a random value
     function set_input_a_rdm();
         void'(std::randomize(a));
     endfunction
 
-    //Function to set the value of the input "B" to a random value
+    //6 Function to set the value of the input "B" to a random value
     function set_input_b_rdm();
         void'(std::randomize(b));
     endfunction
 
-    // Function to set the value of the input "A" to a random value and "B" to zero
+    //7 Function to set the value of the input "A" to a random value and "B" to zero
     function set_input_a_rdm_and_b_zero();
         void'(std::randomize(a));
         b = 0;
     endfunction
 
-    // Function to set the value of the input "A" to zero and "B" to a random value
+    //8 Function to set the value of the input "A" to zero and "B" to a random value
     function set_input_b_rdm_and_a_zero();
         a = 0;
         void'(std::randomize(b));
     endfunction
 
-    // Function to set the value of the input "A" and "B" to a random value
+    //9 Function to set the value of the input "A" and "B" to a random value
     function set_input_a_and_b_rdm();
         void'(std::randomize(a));
         void'(std::randomize(b));
     endfunction
 
-    // Function to setthe value of the input "A" to Nan
+    //10 Function to setthe value of the input "A" to Nan
     function set_input_a_to_nan();
-        a = 32'h7fc00000;
+        a = NAN;
     endfunction
 
-    // Function to set the value of the input "B" to Nan
+    //11 Function to set the value of the input "B" to Nan
     function set_input_b_to_nan();
-        b = 32'h7fc00000;
+        b = NAN;
     endfunction
 
-    // Function to set the value of the input "A" to positive inf
+    //12 Function to set the value of the input "A" to positive inf
     function set_input_a_to_inf();
-        a = 32'h7f800000;
+        a = INF;
     endfunction
 
-    // Function to set the value of the input "B" to positive inf
+    //13 Function to set the value of the input "B" to positive inf
     function set_input_b_to_inf();
-        b = 32'h7f800000;
+        b = INF;
     endfunction
 
-    // Function to set the value of the input "A" to negative inf
+    //14 Function to set the value of the input "A" to negative inf
     function set_input_a_to_neg_inf();
-        a = 32'hff800000;
+        a = NEG_INF;
     endfunction
 
-    // Function to set the value of the input "B" to negative inf
+    //15 Function to set the value of the input "B" to negative inf
     function set_input_b_to_neg_inf();
-        b = 32'hff800000;
+        b = NEG_INF;
     endfunction
 
-    //Function to set the input "A" to maximum positive value
+    //16 Function to set the input "A" to maximum positive value
     function set_input_a_max_pos();
-        a[31] = 0;
-        a[30:23] = 254;
-        a[22:0] = '1;
+        a = MAX_POS;
     endfunction
 
-    //Function to set the input "A" to minimum positive value
-    /*
-    function set_input_a_min_pos();
-        a[31] = 0;
-        a[30:23] = '1;
-        a[22:0] = '0;
-    endfunction
-*/
-    //Function to set the input "A" to maximum negative value
+    //17 Function to set the input "A" to maximum negative value
     function set_input_a_max_neg();
-        a[31] = 1;
-        a[30:23] = 254;
-        a[22:0] = '1;
+        a = MAX_NEG;
     endfunction
 
-    //Function to set the input "A" to minimum negative value "Normalized"
+    //18 Function to set the input "A" to minimum positive value "Normalized"
+    function set_input_a_min_pos();
+        a = MIN_POS;
+    endfunction
+
+    //19 Function to set the input "A" to minimum positive value "Denormalized"
+    function set_input_a_min_pos_denorm();
+        a = MIN_POS_DENORM;
+    endfunction
+
+    //20 Function to set the input "A" to minimum negative value "Normalized"
     function set_input_a_min_neg();
-        a[31] = 1;
-        a[30:23] = 1;
-        a[22:0] = '0;
+        a = MIN_NEG;
     endfunction
 
-    //Function to set the input "A" to minimum negative value "Denormalized"
+    //21 Function to set the input "A" to minimum negative value "Denormalized"
     function set_input_a_min_neg_denorm();
-        a[31] = 1;
-        a[30:23] = '0;
-        a[22:0] = 1;
+        a = MIN_NEG_DENORM;
     endfunction
 
-    //Function to set the input "B" to maximum positive value   
+    //22 Function to set the input "B" to maximum positive value
     function set_input_b_max_pos();
-        b[31] = 0;
-        b[30:23] = 254;
-        b[22:0] = '1;
+        b = MAX_POS;
     endfunction
 
-    //Function to set the input "B" to minimum positive value "Normalized"
-    function set_input_b_min_pos();
-        b[31] = 0;
-        b[30:23] = 1;
-        b[22:0] = '0;
-    endfunction
-
-    //Function to set the input "B" to minimum positive value "Denormalized"
-    function set_input_b_min_pos_denorm();
-        b[31] = 0;
-        b[30:23] = '0;
-        b[22:0] = 1;
-    endfunction
-
-    //Function to set the input "B" to maximum negative value
+    //23 Function to set the input "B" to maximum negative value
     function set_input_b_max_neg();
-        b[31] = 1;
-        b[30:23] = 254;
-        b[22:0] = '1;
+        b = MAX_NEG;
     endfunction
 
-    //Function to set the input "B" to minimum negative value "Normalized"
+    //24 Function to set the input "B" to minimum positive value "Normalized"
+    function set_input_b_min_pos();
+        b = MIN_POS;
+    endfunction
+
+    //25 Function to set the input "B" to minimum positive value "Denormalized"
+    function set_input_b_min_pos_denorm();
+        b = MIN_POS_DENORM;
+    endfunction
+
+    //26 Function to set the input "B" to minimum negative value "Normalized"
     function set_input_b_min_neg();
-        b[31] = 1;
-        b[30:23] = 1;
-        b[22:0] = '0;    
+        b = MIN_NEG;
     endfunction
 
-    //Function to set the input "A" and "B" to maximum positive value
-    function set_input_a_and_b_max_pos();
-        a[31] = 0;
-        a[30:23] = 254;
-        a[22:0] = '1;
-        b[31] = 0;
-        b[30:23] = 254;
-        b[22:0] = '1;
+    //27 Function to set the input "B" to minimum negative value "Denormalized"
+    function set_input_b_min_neg_denorm();
+        b = MIN_NEG_DENORM;
     endfunction
 
-    //Function to set the input "A" and "B" to minimum positive value "Normalized"
-    function set_input_a_and_b_min_pos();
-        a[31] = 0;
-        a[30:23] = 1;
-        a[22:0] = '0;
-        b[31] = 0;
-        b[30:23] = 1;
-        b[22:0] = '0;
-    endfunction
-
-    //Function to set the input "A" and "B" to minimum positive value "Denormalized"
-    function set_input_a_and_b_min_pos_denorm();
-        a[31] = 0;
-        a[30:23] = '0;
-        a[22:0] = 1;
-        b[31] = 0;
-        b[30:23] = '0;
-        b[22:0] = 1;
-    endfunction
-
-    //Function to set the input "A" and "B" to maximum negative value
-    function set_input_a_and_b_max_neg();
-        a[31] = 1;
-        a[30:23] = 254;
-        a[22:0] = '1;
-        b[31] = 1;
-        b[30:23] = 254;
-        b[22:0] = '1;
-    endfunction
-
-    //Function to set the input "A" and "B" to minimum negative value "Normalized"
-    function set_input_a_and_b_min_neg();
-        a[31] = 1;
-        a[30:23] = 1;
-        a[22:0] = '0;
-        b[31] = 1;
-        b[30:23] = 1;
-        b[22:0] = '0;
-    endfunction
-
-    //Function to set the input "A" and "B" to minimum negative value "Denormalized"
-    function set_input_a_and_b_min_neg_denorm();
-        a[31] = 1;
-        a[30:23] = '0;
-        a[22:0] = 1;
-        b[31] = 1;
-        b[30:23] = '0;
-        b[22:0] = 1;
-    endfunction
-/*
-    // Function to randomize input B with values > MIDDLE_VALUE and randomize input A with values > B
-    function randomize_inputs_a_and_b_overflow();
-        void'(std::randomize(a, b) with {b > MID_VAl; a > b;});
-    endfunction
-
-    // Function to randomize input A with values > MIDDLE_VALUE and randomize input B with values > B
-    function randomize_inputs_b_and_a_overflow();
-        void'(std::randomize(a, b) with {a > MID_VAl; b > a;});
-    endfunction
-*/
-    //Function used to randomize both inputs (A,B) where A is greater than B.
+    //28 Function used to randomize both inputs (A,B) where A is greater than B.
     function randomize_inputs_a_greater_than_b();
         void'(std::randomize(a, b) with {a > b;});
     endfunction
 
-    //Function used to randomize both inputs (A,B) where A is less than B.
+    //29 Function used to randomize both inputs (A,B) where A is less than B.
     function randomize_inputs_a_less_than_b();
         void'(std::randomize(a, b) with {a < b;});
     endfunction
 
-    //Function used to set the value of input A to a specific value.
+    //30 Function used to set the value of input A to a specific value.
     function set_input_a_to_specific_value(bit [WIDTH-1:0] value);
         a = value;
     endfunction
 
-    //Function used to set the value of input B to a specific value.
+    //31 Function used to set the value of input B to a specific value.
     function set_input_b_to_specific_value(bit [WIDTH-1:0] value);
         b = value;
     endfunction
