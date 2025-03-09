@@ -19,12 +19,14 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-    
-
 module tb_top;
 
     parameter CICLES = 1000;
     parameter WIDTH = 32;
+    parameter ADD_SEL = 1;
+    parameter SUB_SEL = 0;
+
+    //clock
     bit clk;
     always #5 clk = !clk;
 
@@ -53,7 +55,7 @@ module tb_top;
         //.clk(clk)
     );
 
-
+    `CREATE_COVERGROUPS(add_sub_main_if_inst.a, add_sub_main_if_inst.b)
     //`define TC_Add_AB_random_p
     //`define TC_ADD_SUB_CHECK
     //initial alu_if_inst.clk = 0;
@@ -61,14 +63,13 @@ module tb_top;
 
     //1
     `ifdef ADD_POS_AB
-        `CREATE_COVERGROUPS(add_sub_main_if_inst.a, add_sub_main_if_inst.b)
         initial begin
             cg_a cg_a_inst = new();
             cg_b cg_b_inst = new();
             repeat(CICLES)@(posedge clk) begin
                 cg_a_inst.sample();
                 cg_b_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
                 add_sub_main_if_inst.a = add_sub_main_if_inst.a & 32'h7fffffff;
                 add_sub_main_if_inst.set_input_b_rdm();
@@ -79,13 +80,13 @@ module tb_top;
     `endif
     //2
     `ifdef ADD_NEG_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk) begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
                 add_sub_main_if_inst.a = add_sub_main_if_inst.a | 32'h80000000;
                 add_sub_main_if_inst.set_input_b_rdm();
@@ -96,13 +97,13 @@ module tb_top;
     `endif
     //5
     `ifdef ADD_INF_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-            //    cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_to_specific_value(32'h7f800000);
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -111,13 +112,13 @@ module tb_top;
     `endif
     //6
     `ifdef ADD_INF_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_b_to_specific_value(32'h7f800000);
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -126,13 +127,13 @@ module tb_top;
     `endif
     //7 Add when A and B are zeros
     `ifdef ADD_ZERO_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-            //    cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_to_zero();
                 add_sub_main_if_inst.set_input_b_to_zero();
             end
@@ -141,13 +142,13 @@ module tb_top;
     `endif
     //8 Add when A is zero and B is random
     `ifdef ADD_ZERO_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_to_zero();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -156,12 +157,13 @@ module tb_top;
     `endif
     //9 Add when B is zero and A is random
     `ifdef ADD_ZERO_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_b_to_zero();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -170,12 +172,13 @@ module tb_top;
     `endif
     //10 A is maximum positive value and B is random
     `ifdef ADD_MAX_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_max_pos();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -184,12 +187,13 @@ module tb_top;
     `endif
     //11 Add when A is random and B is maximum positive value
     `ifdef ADD_MAX_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_b_max_pos();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -198,12 +202,13 @@ module tb_top;
     `endif
     //12 Add A and B with maximum positive value
     `ifdef ADD_MAX_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_max_pos();
                 add_sub_main_if_inst.set_input_b_max_pos();
             end
@@ -212,13 +217,13 @@ module tb_top;
     `endif
     //13 Add when A and B are Nan
     `ifdef ADD_NAN_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-            //    cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_b_to_nan();
                 add_sub_main_if_inst.set_input_a_to_nan();
             end
@@ -227,12 +232,13 @@ module tb_top;
     `endif
     //14 Add when A is NaN and B is random
     `ifdef ADD_NAN_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_to_nan();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -241,13 +247,13 @@ module tb_top;
     `endif
     //15 Add when B is NaN and A is random
     `ifdef ADD_NAN_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 1;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_b_to_nan();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -256,13 +262,14 @@ module tb_top;
     `endif
     //16
     `ifdef SUB_POS_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-          //  cg_a_exp cg_a_exp_inst = new();
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
+                cg_a_inst.sample();
+                cg_b_inst.sample();
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
-                add_sub_main_if_inst.operation_select = 0;
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
                 add_sub_main_if_inst.a = add_sub_main_if_inst.a & 32'h7fffffff;
                 add_sub_main_if_inst.set_input_b_rdm();
@@ -273,14 +280,14 @@ module tb_top;
     `endif
     //17
     `ifdef SUB_NEG_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
+                cg_a_inst.sample();
+                cg_b_inst.sample();
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
-                add_sub_main_if_inst.operation_select = 0;
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
                 add_sub_main_if_inst.a = add_sub_main_if_inst.a | 32'h80000000;
                 add_sub_main_if_inst.set_input_b_rdm();
@@ -291,13 +298,13 @@ module tb_top;
     `endif
     //20 Substraction when A and B are zeros
     `ifdef SUB_ZERO_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_to_zero();
                 add_sub_main_if_inst.set_input_b_to_zero();
             end
@@ -306,13 +313,13 @@ module tb_top;
     `endif
     //21 Substraction when A is zero and B is random
     `ifdef SUB_ZERO_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_to_zero();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -321,13 +328,13 @@ module tb_top;
     `endif
     //22 Substraction when B is zero and A is random
     `ifdef SUB_ZERO_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_b_to_zero();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -336,13 +343,13 @@ module tb_top;
     `endif
     //23 Substraction when A is maximum negative value and B is random
     `ifdef SUB_MAX_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_max_neg();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -351,13 +358,13 @@ module tb_top;
     `endif
     //24 Substraction when A is random and B is maximum negative value
     `ifdef SUB_MAX_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_b_max_neg();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
@@ -366,13 +373,13 @@ module tb_top;
     `endif
     //25 Substraction when A and B are NaN
     `ifdef SUB_NAN_AB
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_b_to_nan();
                 add_sub_main_if_inst.set_input_a_to_nan();
             end
@@ -381,13 +388,13 @@ module tb_top;
     `endif
     //26 Substraction when A is NaN and B is random
     `ifdef SUB_NAN_A
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_to_nan();
                 add_sub_main_if_inst.set_input_b_rdm();
             end
@@ -396,13 +403,13 @@ module tb_top;
     `endif
     //27 Substraction when B is NaN and A is random
     `ifdef SUB_NAN_B
-        //`CREATE_EXPONENT_COVERGROUP(cg_a_exp, add_sub_main_if_inst.a)
         initial begin
-            //cg_a_exp cg_a_exp_inst = new();
-
+            cg_a cg_a_inst = new();
+            cg_b cg_b_inst = new();
             repeat (CICLES)@(posedge clk)begin
-                //cg_a_exp_inst.sample();
-                add_sub_main_if_inst.operation_select = 0;
+                cg_a_inst.sample();
+                cg_b_inst.sample();
+                add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_b_to_nan();
                 add_sub_main_if_inst.set_input_a_rdm();
             end
