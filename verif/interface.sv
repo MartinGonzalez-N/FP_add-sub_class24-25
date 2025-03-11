@@ -7,17 +7,6 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     logic [MANT_BITS-1:0] mantissa_a, mantissa_b, mantissa_result;
     logic [EXP_BITS-1:0] exp_a, exp_b, exp_result;
 
-    parameter MID_VAl = 32'h3f800000;
-    parameter INF = 32'h7f800000;
-    parameter NEG_INF = 32'hff800000;
-    parameter NAN = 32'h7fc00000;
-    parameter MAX_POS = 32'h7f7fffff;
-    parameter MIN_POS = 32'h00800000; //Normalized
-    parameter MIN_POS_DENORM = 32'h00000001; //Denormalized
-    parameter MAX_NEG = 32'hff7fffff;
-    parameter MIN_NEG = 32'h80800000; //Normalized
-    parameter MIN_NEG_DENORM = 32'h80000001; //Denormalized
-
     task automatic generate_custom_fp(output bit [31:0] fp_num);
         bit [7:0] exponent;
         bit [22:0] mantissa;
@@ -46,8 +35,8 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     
     task task_generate_fixed_stimul();
         begin
-            a = 32'h3f800000;
-            b = 32'h3f800000;
+            a = `MID_VAl;
+            b = `MID_VAl;
         end
     endtask
     
@@ -105,92 +94,92 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
 
     //10 Function to setthe value of the input "A" to Nan
     function set_input_a_to_nan();
-        a = NAN;
+        a = `NAN;
     endfunction
 
     //11 Function to set the value of the input "B" to Nan
     function set_input_b_to_nan();
-        b = NAN;
+        b = `NAN;
     endfunction
 
     //12 Function to set the value of the input "A" to positive inf
     function set_input_a_to_inf();
-        a = INF;
+        a = `INF;
     endfunction
 
     //13 Function to set the value of the input "B" to positive inf
     function set_input_b_to_inf();
-        b = INF;
+        b = `INF;
     endfunction
 
     //14 Function to set the value of the input "A" to negative inf
     function set_input_a_to_neg_inf();
-        a = NEG_INF;
+        a = `NEG_INF;
     endfunction
 
     //15 Function to set the value of the input "B" to negative inf
     function set_input_b_to_neg_inf();
-        b = NEG_INF;
+        b = `NEG_INF;
     endfunction
 
     //16 Function to set the input "A" to maximum positive value
     function set_input_a_max_pos();
-        a = MAX_POS;
+        a = `MAX_POS;
     endfunction
 
     //17 Function to set the input "A" to maximum negative value
     function set_input_a_max_neg();
-        a = MAX_NEG;
+        a = `MAX_NEG;
     endfunction
 
     //18 Function to set the input "A" to minimum positive value "Normalized"
     function set_input_a_min_pos();
-        a = MIN_POS;
+        a = `MIN_POS;
     endfunction
 
     //19 Function to set the input "A" to minimum positive value "Denormalized"
     function set_input_a_min_pos_denorm();
-        a = MIN_POS_DENORM;
+        a = `MIN_POS_DENORM;
     endfunction
 
     //20 Function to set the input "A" to minimum negative value "Normalized"
     function set_input_a_min_neg();
-        a = MIN_NEG;
+        a = `MIN_NEG;
     endfunction
 
     //21 Function to set the input "A" to minimum negative value "Denormalized"
     function set_input_a_min_neg_denorm();
-        a = MIN_NEG_DENORM;
+        a = `MIN_NEG_DENORM;
     endfunction
 
     //22 Function to set the input "B" to maximum positive value
     function set_input_b_max_pos();
-        b = MAX_POS;
+        b = `MAX_POS;
     endfunction
 
     //23 Function to set the input "B" to maximum negative value
     function set_input_b_max_neg();
-        b = MAX_NEG;
+        b = `MAX_NEG;
     endfunction
 
     //24 Function to set the input "B" to minimum positive value "Normalized"
     function set_input_b_min_pos();
-        b = MIN_POS;
+        b = `MIN_POS;
     endfunction
 
     //25 Function to set the input "B" to minimum positive value "Denormalized"
     function set_input_b_min_pos_denorm();
-        b = MIN_POS_DENORM;
+        b = `MIN_POS_DENORM;
     endfunction
 
     //26 Function to set the input "B" to minimum negative value "Normalized"
     function set_input_b_min_neg();
-        b = MIN_NEG;
+        b = `MIN_NEG;
     endfunction
 
     //27 Function to set the input "B" to minimum negative value "Denormalized"
     function set_input_b_min_neg_denorm();
-        b = MIN_NEG_DENORM;
+        b = `MIN_NEG_DENORM;
     endfunction
 
     //28 Function used to randomize both inputs (A,B) where A is greater than B.
