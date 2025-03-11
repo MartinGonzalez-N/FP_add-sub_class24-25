@@ -14,12 +14,12 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
         bit [2:0] mant_rand;
         begin
             exp_rand = $urandom_range(0, 3);
-            exponent = {1'b1, 5'b00000, exp_rand};
+            exponent = {`ONE_BIT, 5'b00000, exp_rand};
             
             mant_rand = $urandom_range(0, 7);
             mantissa = {mant_rand, 20'b0};
             
-            fp_num = {1'b0, exponent, mantissa};
+            fp_num = {`ZERO_BIT, exponent, mantissa};
         end
     endtask
 
@@ -45,18 +45,18 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     
     //1 Function to set the value of the input "A" to zero
     function set_input_a_to_zero();
-        a = 0;
+        a = `ZERO;
     endfunction
     
     //2 Function to set the value of the input "B" to zero
     function set_input_b_to_zero();
-        b = 0;
+        b = `ZERO;
     endfunction    
 
     //3 Function to set the value of the input "A" and "B" to zero
     function set_input_a_and_b_zero();
-        a = 0;
-        b = 0;
+        a = `ZERO;
+        b = `ZERO;
     endfunction
 
     //4 Function to set the value of operation_select to a random value
@@ -77,12 +77,12 @@ interface add_sub_main_if #(parameter WIDTH = 32, EXP_BITS = 8, MANT_BITS = 23);
     //7 Function to set the value of the input "A" to a random value and "B" to zero
     function set_input_a_rdm_and_b_zero();
         void'(std::randomize(a));
-        b = 0;
+        b = `ZERO;
     endfunction
 
     //8 Function to set the value of the input "A" to zero and "B" to a random value
     function set_input_b_rdm_and_a_zero();
-        a = 0;
+        a = `ZERO;
         void'(std::randomize(b));
     endfunction
 

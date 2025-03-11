@@ -14,7 +14,7 @@ module add_sub_asserts(
     shortreal expected_result;
     //1
     property assert_add;
-        @(posedge clk)(operation_select == 1) |-> (shortreal'(a) + shortreal'(b) == shortreal'(result));
+        @(posedge clk)(operation_select == `ADD_SEL) |-> (shortreal'(a) + shortreal'(b) == shortreal'(result));
     endproperty
     assert property (assert_add)
     else begin
@@ -22,7 +22,7 @@ module add_sub_asserts(
     end
     //2
     property assert_sub;
-        @(posedge clk)(operation_select == 0) |-> ((shortreal'(a) + shortreal'(b) == shortreal'(result)));
+        @(posedge clk)(operation_select == `SUB_SEL) |-> ((shortreal'(a) + shortreal'(b) == shortreal'(result)));
     endproperty
     assert property (assert_sub)
     else begin
@@ -30,7 +30,7 @@ module add_sub_asserts(
     end
     //4
     property assert_infs_add;
-        @(posedge clk)(a == 32'h7f800000 && b == 32'h7f800000 && operation_select == 1) |-> (result == 32'h7f800000);
+        @(posedge clk)(a == `INF && b == `INF && operation_select == `ADD_SEL) |-> (result == `INF);
     endproperty
     assert property (assert_infs_add)
     else begin
@@ -38,7 +38,7 @@ module add_sub_asserts(
     end
     //5
     property assert_infs_sub;
-        @(posedge clk)(a == 32'h7f800000 && b == 32'h7f800000 && operation_select == 0) |-> (result[30:23] == 8'hff);
+        @(posedge clk)(a == `INF && b == `INF && operation_select == `SUB_SEL) |-> (result[30:23] == `EXP_RISED);
     endproperty
     assert property (assert_infs_sub)
     else begin
@@ -46,7 +46,7 @@ module add_sub_asserts(
     end
     //6
     property assert_inf_infn_add;
-        @(posedge clk)(a == 32'h7f800000 && b == 32'hff800000 && operation_select == 1) |-> (result[30:23] == 8'hff);
+        @(posedge clk)(a == `INF && b == `NEG_INF && operation_select == `ADD_SEL) |-> (result[30:23] == `EXP_RISED);
     endproperty
     assert property (assert_inf_infn_add)
     else begin
@@ -54,7 +54,7 @@ module add_sub_asserts(
     end
     //7
     property assert_inf_add;
-        @(posedge clk)(a == 32'h7f800000 &&  operation_select == 1) |-> (result == 32'h7f800000);
+        @(posedge clk)(a == `INF &&  operation_select == `ADD_SEL) |-> (result == `INF);
     endproperty
     assert property (assert_inf_add)
     else begin
@@ -62,7 +62,7 @@ module add_sub_asserts(
     end
     //8
     property assert_as_add;
-        @(posedge clk)(a == b &&  operation_select == 1) |-> (result == a+a);
+        @(posedge clk)(a == b &&  operation_select == `ADD_SEL) |-> (result == a+a);
     endproperty
     assert property (assert_as_add)
     else begin
@@ -70,7 +70,7 @@ module add_sub_asserts(
     end
     //9
     property assert_as_sub;
-        @(posedge clk)(a == b &&  operation_select == 0) |-> (result == 0);
+        @(posedge clk)(a == b &&  operation_select == `SUB_SEL) |-> (result == `ZERO);
     endproperty
     assert property (assert_as_sub)
     else begin
@@ -78,7 +78,7 @@ module add_sub_asserts(
     end
     //10
     property assert_a_an_add;
-        @(posedge clk)(a[30:0] == b[30:0] && a[31] == ~b[31] & operation_select == 1) |-> (result == 0);
+        @(posedge clk)(a[30:0] == b[30:0] && a[31] == ~b[31] & operation_select == `ADD_SEL) |-> (result == `ZERO);
     endproperty
     assert property (assert_a_an_add)
     else begin
@@ -86,7 +86,7 @@ module add_sub_asserts(
     end
     //11
     property assert_a_an_sub;
-        @(posedge clk)(a[30:0] == b[30:0] && a[31] == ~b[31] & operation_select == 0) |-> (result == a+a);
+        @(posedge clk)(a[30:0] == b[30:0] && a[31] == ~b[31] & operation_select == `SUB_SEL) |-> (result == a+a);
     endproperty
     assert property (assert_a_an_sub)
     else begin
@@ -94,7 +94,7 @@ module add_sub_asserts(
     end
     //12
     property assert_signs_0_add;
-        @(posedge clk)(a[31] == 0 && b[31] == 0 && operation_select == 1) |-> (result[31] == 0);
+        @(posedge clk)(a[31] == `ZERO_BIT && b[31] == `ZERO_BIT && operation_select == `ADD_SEL) |-> (result[31] == `ZERO_BIT);
     endproperty
     assert property (assert_signs_0_add)
     else begin
@@ -102,7 +102,7 @@ module add_sub_asserts(
     end
     //13
     property assert_signs_1_add;
-        @(posedge clk)(a[31] == 1 && b[31] == 1 & operation_select == 1) |-> (result[31] == 1);
+        @(posedge clk)(a[31] == `ONE_BIT && b[31] == `ONE_BIT & operation_select == `ADD_SEL) |-> (result[31] == `ONE_BIT);
     endproperty
     assert property (assert_signs_1_add)
     else begin
