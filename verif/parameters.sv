@@ -19,4 +19,5 @@
 `define ZERO 32'h00000000
 `define ZERO_BIT 1'b0 
 `define ONE_BIT 1'b1
+`define EXP_RISED 8'hff
 
