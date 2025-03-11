@@ -25,6 +25,10 @@ module tb_top;
     parameter WIDTH = 32;
     parameter ADD_SEL = 1;
     parameter SUB_SEL = 0;
+    parameter SIGN_MASK = 32'h80000000;
+    parameter EXP_MASK = 32'h7f800000;
+    parameter MANT_MASK = 32'h007fffff;
+
 
     //clock
     bit clk;
@@ -71,9 +75,9 @@ module tb_top;
                 cg_b_inst.sample();
                 add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
-                add_sub_main_if_inst.a = add_sub_main_if_inst.a & 32'h7fffffff;
+                add_sub_main_if_inst.a = add_sub_main_if_inst.a & (EXP_MASK | MANT_MASK);
                 add_sub_main_if_inst.set_input_b_rdm();
-                add_sub_main_if_inst.b = add_sub_main_if_inst.b & 32'h7fffffff;
+                add_sub_main_if_inst.b = add_sub_main_if_inst.b & (EXP_MASK | MANT_MASK);
             end
             $finish;
         end
@@ -88,9 +92,9 @@ module tb_top;
                 cg_b_inst.sample();
                 add_sub_main_if_inst.operation_select = ADD_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
-                add_sub_main_if_inst.a = add_sub_main_if_inst.a | 32'h80000000;
+                add_sub_main_if_inst.a = add_sub_main_if_inst.a | SIGN_MASK;
                 add_sub_main_if_inst.set_input_b_rdm();
-                add_sub_main_if_inst.b = add_sub_main_if_inst.b | 32'h80000000;
+                add_sub_main_if_inst.b = add_sub_main_if_inst.b | SIGN_MASK;
             end
             $finish;
         end
@@ -104,7 +108,7 @@ module tb_top;
                 cg_a_inst.sample();
                 cg_b_inst.sample();
                 add_sub_main_if_inst.operation_select = ADD_SEL;
-                add_sub_main_if_inst.set_input_a_to_specific_value(32'h7f800000);
+                add_sub_main_if_inst.set_input_a_to_specific_value(EXP_MASK);
                 add_sub_main_if_inst.set_input_b_rdm();
             end
             $finish;
@@ -119,7 +123,7 @@ module tb_top;
                 cg_a_inst.sample();
                 cg_b_inst.sample();
                 add_sub_main_if_inst.operation_select = ADD_SEL;
-                add_sub_main_if_inst.set_input_b_to_specific_value(32'h7f800000);
+                add_sub_main_if_inst.set_input_b_to_specific_value(EXP_MASK);
                 add_sub_main_if_inst.set_input_a_rdm();
             end
             $finish;
@@ -271,9 +275,9 @@ module tb_top;
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
                 add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
-                add_sub_main_if_inst.a = add_sub_main_if_inst.a & 32'h7fffffff;
+                add_sub_main_if_inst.a = add_sub_main_if_inst.a & (EXP_MASK | MANT_MASK);
                 add_sub_main_if_inst.set_input_b_rdm();
-                add_sub_main_if_inst.b = add_sub_main_if_inst.b & 32'h7fffffff;
+                add_sub_main_if_inst.b = add_sub_main_if_inst.b & (EXP_MASK | MANT_MASK);
             end
             $finish;
         end
@@ -289,9 +293,9 @@ module tb_top;
                 //a_result_verif:assert ($shortrealtobits(expected_result) == add_sub_main_if_inst.result);
                 add_sub_main_if_inst.operation_select = SUB_SEL;
                 add_sub_main_if_inst.set_input_a_rdm();
-                add_sub_main_if_inst.a = add_sub_main_if_inst.a | 32'h80000000;
+                add_sub_main_if_inst.a = add_sub_main_if_inst.a | SIGN_MASK;
                 add_sub_main_if_inst.set_input_b_rdm();
-                add_sub_main_if_inst.b = add_sub_main_if_inst.b | 32'h80000000;
+                add_sub_main_if_inst.b = add_sub_main_if_inst.b | SIGN_MASK;
             end
             $finish;
         end
