@@ -34,13 +34,17 @@ module normalize_rounder #(parameter WIDTH = 32) (
     reg [22:0] final_mant = 0;
 
     reg [4:0]shift = 0;
+    wire [22:0] mant1;
     wire [22:0] mant;
     wire [2:0] GRS;
+    wire round;
     wire first_bit;
     wire [26:0] rounded_mant;
 
     assign rounded_mant = (carry_out & op) ? ({1'b1,result_mant} >> 1) : result_mant;
-    assign {first_bit,mant,GRS} = rounded_mant;
+    assign {first_bit,mant1,GRS} = rounded_mant;
+    assign round = ((GRS == 3'b000) | ((GRS == 3'b111)&(mant1[0] == 0))) ? 1'b0 : 1'b1;
+    assign mant = mant1+round;
     // Normalization
 
     // always @(posedge clk) begin
