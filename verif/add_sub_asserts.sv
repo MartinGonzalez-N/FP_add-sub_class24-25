@@ -14,19 +14,25 @@ module add_sub_asserts(
     shortreal expected_result;
     //1
     property assert_add;
-        @(posedge clk)(operation_select == `ADD_SEL) |-> (shortreal'(a) + shortreal'(b) == shortreal'(result));
+        @(posedge clk) (operation_select == `ADD_SEL) |-> 
+            ($bitstoshortreal(a) + $bitstoshortreal(b) == $bitstoshortreal(result));
     endproperty
+
     assert property (assert_add)
     else begin
-        $error("assert_add: The addition operation is not correct. The result of the module is %0f and the expected result was %0f.", shortreal'(result), shortreal'(a) + shortreal'(b));
+        $error("assert_add: The addition operation is not correct. The result of the module is %0f (hex: %h) and the expected result was %0f (hex: %h).",
+            $bitstoshortreal(result), result, $bitstoshortreal(a) + $bitstoshortreal(b), $shortrealtobits($bitstoshortreal(a) + $bitstoshortreal(b)));
     end
     //2
     property assert_sub;
-        @(posedge clk)(operation_select == `SUB_SEL) |-> ((shortreal'(a) + shortreal'(b) == shortreal'(result)));
+        @(posedge clk)(operation_select == `SUB_SEL) |-> 
+            ($bitstoshortreal(a) + $bitstoshortreal(b) == $bitstoshortreal(result));
     endproperty
+
     assert property (assert_sub)
     else begin
-        $error("assert_sub: The subtraction operation is not correct.The result of the module is %0f and the expected result was %0f.", shortreal'(result), shortreal'(a) - shortreal'(b));
+        $error("assert_sub: The subtraction operation is not correct.The result of the module is %0f (hex: %h) and the expected result was %0f.",
+            $bitstoshortreal(result), result, $bitstoshortreal(a) + $bitstoshortreal(b), $shortrealtobits($bitstoshortreal(a) + $bitstoshortreal(b)));
     end
     //4
     property assert_infs_add;
